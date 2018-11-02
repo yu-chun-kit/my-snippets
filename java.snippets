@@ -1,0 +1,47 @@
+# Module Docstring
+snippet docs
+	/*
+		Filename: ${1:`vim_snippets#Filename('$1.java', 'foo.java')`}
+		Programmer: `g:snips_author`
+		Email: `g:snips_email`
+		Github: `g:snips_github`
+		Description: a program about${0}
+	*/
+# java input
+snippet ip
+	${1:var} = ${2:scanner}.next${0:Int}();
+# for
+snippet fori
+	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+		${4}
+	}
+# println
+snippet jp
+	System.out.println("${1}");${0}
+snippet sop
+	System.out.println(${0});
+snippet     prf
+    System.out.print
+snippet     strf
+    String.format("${2:%.2f}", ${1:str})${0}
+snippet     St
+    String 
+snippet jtlrand
+    import java.util.concurrent.ThreadLocalRandom;
+snippet trand
+    Random rnd = ThreadLocalRandom.current();
+# scanner
+snippet scan
+    Scanner ${1:kb} = new Scanner(System.in);${0}
+snippet fisheryate "shuffle array"
+    static void shuffleArray(int[] ar) {
+        // If running on Java 6 or older, use `new Random()` on RHS here
+        Random rnd = ThreadLocalRandom.current();
+        for (int i = ar.length - 1; i > 0; i--) {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }

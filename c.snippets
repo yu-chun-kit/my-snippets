@@ -1,0 +1,27 @@
+# DocStrings
+snippet docs
+	/*
+		Filename: ${1:`vim_snippets#Filename('$1.c', 'foo.c')`}
+		Programmer: `g:snips_author`
+		Email: `g:snips_email`
+		Github: `g:snips_github`
+		Description: a program about ${0: }
+	*/
+snippet mn ""
+	int main(int argc, const char *argv[]) {
+		${0:printf("Hello World");}
+		return 0;
+	}
+snippet countnum "count num"
+    ${1:c} >= '0' && $1 <= '9'${0}
+snippet upperc "count num"
+    ${1:c} >= 'A' && $1 <= 'Z'${0}
+snippet lowerc "count num"
+    ${1:c} >= 'a' && $1 <= 'z'${0}
+snippet swapline "function swap"
+    void swap(int* x, int* y) {
+        int temp;
+        temp = *x;
+        *x = *y;
+        *y = temp;
+    }
