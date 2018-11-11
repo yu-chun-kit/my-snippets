@@ -25,7 +25,5 @@ snippet mn "main function"
 
     if __name__ == '__main__':
         $1()
-snippet sf "self...."
-    self.${1} = ${2:$1}${0}
-snippet rdint "random number"
-    rand_int = randint(${1:1}, ${2:10})${0}
+snippet sf "self"
+    self.${1:var} = ${2:self.$1}${0}
