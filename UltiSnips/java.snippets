@@ -1,0 +1,36 @@
+###################
+#  JAVA SNIPPETS  #
+###################
+snippet jutil "Description" b
+import java.util.${1:*};${0}
+endsnippet
+# Scanner
+snippet scan
+Scanner ${1:kb} = new Scanner(System.in);${0}
+endsnippet
+snippet ip "input" b
+${1:var} = ${2:kb}.next${0:Int}();
+endsnippet
+snippet prf "printf" b
+System.out.print
+endsnippet
+snippet strf "format str" w
+String.format("${2:%.2f}", ${1:str})${0}
+endsnippet
+snippet jtlrand "import trand" b
+import java.util.concurrent.ThreadLocalRandom;
+endsnippet
+snippet trand "thread rand" b
+Random rnd = ThreadLocalRandom.current();
+endsnippet
+snippet dbg "if (DEVELOPMENT) dbg" "re.match('^if \(DEVELOPMENT\) \{', snip.buffer[snip.line-1])" be
+debugger;
+endsnippet
+snippet sop
+System.out.println("${0}");
+endsnippet
+snippet fori
+for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+	${4:{VISUAL}}
+}
+endsnippet

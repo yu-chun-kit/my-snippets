@@ -1,0 +1,83 @@
+############
+#  python  #
+############
+global !p
+from useful_func import tranf_clsname, write_init_body, triple_quotes, get_args
+from useful_func import write_docstring_args
+endglobal
+
+snippet mn "main function"
+def ${1:main}():
+	""" main function of `!p snip.rv = fn.split('.')[0]` """
+	${0:}
+
+
+if __name__ == '__main__':
+	$1()
+endsnippet
+snippet pr "print" b
+print(${1:${VISUAL}})${0}
+endsnippet
+snippet input "input" b
+${1:var} = input("${2:Please enter the $1} : ")${3:.split()}
+endsnippet
+snippet sf "self" b
+	self.${1:var} = ${2:self.$1}${0}
+endsnippet
+snippet mplt "matlib plt" b
+matplotlab.pyplot as plt
+endsnippet
+snippet xfor "x ** ?" w
+x**${1:2} for x in range(${2:1, 10})${0}
+endsnippet
+snippet pltplot "plt plot" Ab
+plt.plot(${1:x_values}, ${2:y_values}, linewidth=${3:5})${0}
+endsnippet
+snippet pltsh "show plt" Ab
+plt.show()
+endsnippet
+snippet plttt "title" Ab
+plt.title("${1:Title}", fontsize=${2:24})${0}
+endsnippet
+snippet pltxl "x_label" Ab
+plt.xlabel("${1:x_values}", fontsize=${2:14})${0}
+endsnippet
+snippet pltyl "y_label" Ab
+plt.ylabel("${1:y_values}", fontsize=${2:14})${0}
+endsnippet
+snippet plttkp "tick_params" Ab
+plt.tick_params(${1})${0}
+endsnippet
+snippet openfile "with open..."
+	filename = "${1:file.txt}"
+	with open(filename, "w+") as f_obj:
+		contents = f_obj.read()
+endsnippet
+snippet cl "class with docstrings" b
+class ${1:`!p snip.rv = tranf_clsname(t, snip)`}(${2:object}):
+	`!p snip.rv = triple_quotes(snip)`${3:Docstring for $1. }`!p snip.rv = triple_quotes(snip)`
+	def __init__(self$4):
+		`!p snip.rv = triple_quotes(snip)`${5:TODO: to be defined1.}`!p
+#snip.rv = ""
+snip >> 2
+
+args = get_args(t[4])
+
+write_docstring_args(args, snip)
+#if args:
+	#snip.rv += '\n' + snip.mkline('', indent='')
+snip += '{0}'.format(triple_quotes(snip))
+
+write_init_body(args, t[2], snip)`
+		$0
+endsnippet
+snippet repr "methods implementing string representation"
+def __repr__(self):
+	${1:pass}
+
+def __str__(self):
+	${2:$1}
+
+def __unicode__(self):
+	${3:$1}
+endsnippet

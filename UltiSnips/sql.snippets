@@ -1,0 +1,19 @@
+#########
+#  sql  #
+#########
+snippet slf "select from" b
+SELECT ${1:*} FROM ${2:table}
+WHERE ${3:in/nin/eq/neq/like/nlike/gt/lt}
+ORDER BY ${4:ASC};
+endsnippet
+snippet ctable "create table" b
+CREATE TABLE ${1:`!p snip.rv = t[1].upper()`} {
+	${0}
+}
+endsnippet
+snippet "([^\s]\w+)\.constr" "CONSTRAINT" Ab
+CONSTRAINT ${1:`!p snip.rv = match.group(1)`}${0}
+endsnippet
+snippet dbg "if (DEVELOPMENT) dbg" "re.match('^if \(DEVELOPMENT\) \{', snip.buffer[snip.line-1])" be
+debugger;
+endsnippet

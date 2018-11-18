@@ -7,27 +7,17 @@ snippet docs
 		Github: `g:snips_github`
 		Description: a program about${0}
 	*/
+snippet studocs
+	/*
+		Filename: ${1:`vim_snippets#Filename('$1.java', 'foo.java')`}
+		Student name: `g:snips_student_name`
+		Class: `g:snips_student_class`
+		Student number: `g:snips_student_number`
+		Description: a program about${0}
+	*/
 # java input
-snippet ip
-	${1:var} = ${2:scanner}.next${0:Int}();
 # for
 snippet fori
 	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
 		${4}
 	}
-# println
-snippet sop
-	System.out.println(${0});
-snippet     prf
-    System.out.print
-snippet     strf
-    String.format("${2:%.2f}", ${1:str})${0}
-snippet     St
-    String 
-snippet jtlrand
-    import java.util.concurrent.ThreadLocalRandom;
-snippet trand
-    Random rnd = ThreadLocalRandom.current();
-# scanner
-snippet scan
-    Scanner ${1:kb} = new Scanner(System.in);${0}
