@@ -1,7 +1,7 @@
 ###################
 #  JAVA SNIPPETS  #
 ###################
-snippet jutil "Description" b
+snippet jv.u "java util" b
 import java.util.${1:*};${0}
 endsnippet
 # Scanner
@@ -29,8 +29,19 @@ endsnippet
 snippet sop
 System.out.println("${0}");
 endsnippet
-snippet fori
+snippet fori "1.count 2.i 3.++" b
 for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
 	${4:{VISUAL}}
 }
+endsnippet
+snippet St "String" w
+String 
+endsnippet
+snippet dou "double" w
+double 
+endsnippet
+snippet toSt "toString" b
+public String toString() {
+	return ${1:String};
+}${0}
 endsnippet

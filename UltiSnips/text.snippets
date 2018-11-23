@@ -1,0 +1,13 @@
+###################
+#  TEXT SNIPPETS  #
+###################
+snippet "([\d]+)([a-h]*)([iv]*)\)" "answer" brA
+`!p
+if match.group(2) and match.group(3):
+	snip.rv = match.group(1)+'('+match.group(2)+')'+'('+match.group(3)+')'
+else:
+	snip.rv = match.group(1)+'('+match.group(2)+')'
+`
+${0}
+endsnippet
+
