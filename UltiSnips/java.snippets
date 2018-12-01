@@ -1,6 +1,24 @@
 ###################
 #  JAVA SNIPPETS  #
 ###################
+snippet docs "document" b
+/**
+	Filename: ${1:`!v vim_snippets#Filename('$1.java', 'foo.java')`}
+	Programmer: `!v g:snips_author`
+	Email: `!v g:snips_email`
+	Github: `!v g:snips_github`
+	Description: a program about${0}
+*/
+endsnippet
+snippet studocs "student detail" b
+/*
+	Filename: ${1:`!v vim_snippets#Filename('$1.java', 'foo.java')`}
+	Student name: `!v g:snips_student_name`
+	Class: `!v g:snips_student_class`
+	Student number: `!v g:snips_student_number`
+	Description: a program about${0}
+*/
+endsnippet
 snippet jv.u "java util" b
 import java.util.${1:*};${0}
 endsnippet
@@ -31,11 +49,8 @@ System.out.println("${0}");
 endsnippet
 snippet fori "1.count 2.i 3.++" b
 for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
-	${4:{VISUAL}}
+	${4:${VISUAL}}
 }
-endsnippet
-snippet St "String" w
-String 
 endsnippet
 snippet dou "double" w
 double 
@@ -45,3 +60,16 @@ public String toString() {
 	return ${1:String};
 }${0}
 endsnippet
+snippet jutil "import util library" b
+import java.util.${1:*};${0}
+endsnippet
+snippet jlang "import lang library" b
+import java.lang.${1:*};${0}
+endsnippet
+snippet jmath "import math library" b
+import java.math.${1:*};${0}
+endsnippet
+snippet jxjop "import jxjop" b
+import javax.swing.JOptionPane;
+endsnippet
+

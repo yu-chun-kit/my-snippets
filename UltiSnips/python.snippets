@@ -12,6 +12,9 @@ endsnippet
 snippet false "" wA
 False
 endsnippet
+snippet none "" wA
+None
+endsnippet
 snippet mn "main function"
 def ${1:`!p snip.rv = fn.split('.')[0]`}():
 	""" main function of `!p snip.rv = fn.split('.')[0]` """
@@ -20,6 +23,27 @@ def ${1:`!p snip.rv = fn.split('.')[0]`}():
 
 if __name__ == '__main__':
 	$1()
+endsnippet
+snippet docs "document" b
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Filename: ${1:`!v vim_snippets#Filename('$1.py', 'foo.py')`}
+Programmer: `!v g:snips_author`
+Email: `!v g:snips_email`
+Github: `!v g:snips_github`
+Description: ${2:useless program}
+"""
+${0:}
+endsnippet
+snippet studocs "student" b
+"""
+Filename: ${1:`!v vim_snippets#Filename('$1.py', 'foo.py')`}
+Student name: `!v g:snips_student_name`
+Class: `!v g:snips_student_class`
+Student number: `!v g:snips_student_number`
+Description: a program about${0}
+"""
 endsnippet
 snippet pr "print" b
 print(${1:${VISUAL}})${0}
@@ -30,14 +54,18 @@ endsnippet
 snippet sf "self" b
 self.${1:var} = ${2:self.$1}${0}
 endsnippet
-snippet mplt "matlib plt" w
-matplotlib.pyplot as plt
-endsnippet
 snippet xfor "x ** ?" w
 x**${1:2} for x in range(${2:1, 10})${0}
 endsnippet
+
+snippet immplt "matlib plt" b
+import matplotlib.pyplot as plt
+endsnippet
 snippet pltplot "plt plot" Ab
-plt.plot(${1:x_values}, ${2:y_values}, linewidth=${3:5})${0}
+plt.plot(${1:${2:x_val}, ${3:y_val}}, linewidth=${4:5})${0}
+endsnippet
+snippet pltsc "scatter" Ab
+plt.scatter(${1:x}, ${2:y}, c='${3:cornflowerblue}', edgecolor='${4:none}', s=${5:40})${0}
 endsnippet
 snippet pltsh "show plt" Ab
 plt.show()
@@ -46,13 +74,13 @@ snippet plttt "title" Ab
 plt.title("${1:Title}", fontsize=${2:24})${0}
 endsnippet
 snippet pltxl "x_label" Ab
-plt.xlabel("${1:x_values}", fontsize=${2:14})${0}
+plt.xlabel("${1:x_val}", fontsize=${2:14})${0}
 endsnippet
 snippet pltyl "y_label" Ab
-plt.ylabel("${1:y_values}", fontsize=${2:14})${0}
+plt.ylabel("${1:y_val}", fontsize=${2:14})${0}
 endsnippet
 snippet plttkp "tick_params" Ab
-plt.tick_params(${1})${0}
+plt.tick_params(axis='${1:}', labelsize=${2:14})${0}
 endsnippet
 snippet openfile "with open..."
 filename = "${1:file.txt}"
@@ -70,9 +98,9 @@ snip >> 2
 args = get_args(t[4])
 
 write_docstring_args(args, snip)
-#if args:
-	#snip.rv += '\n' + snip.mkline('', indent='')
-snip += '{0}'.format(triple_quotes(snip))
+if args:
+	snip.rv += '\n' + snip.mkline('', indent='')
+	snip += '{0}'.format(triple_quotes(snip))
 
 write_init_body(args, t[2], snip)`
 		$0
@@ -86,4 +114,12 @@ def __str__(self):
 
 def __unicode__(self):
 	${3:$1}
+endsnippet
+snippet poisson "poisson distribution" b
+(math.exp(${1:muse}) * $1 ** ${2:x_var}) / math.factorial($2)${0}
+endsnippet
+snippet nCr "combination" b
+def nCr(n,r):
+	f = math.factorial
+	return f(n) / f(r) / f(n-r)
 endsnippet

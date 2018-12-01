@@ -17,3 +17,21 @@ endsnippet
 snippet dbg "if (DEVELOPMENT) dbg" "re.match('^if \(DEVELOPMENT\) \{', snip.buffer[snip.line-1])" be
 debugger;
 endsnippet
+
+snippet "([\d]+)([\w])([iv]*)\)" "answer" brA
+`!p
+if match.group(2) and match.group(3):
+	snip.rv = match.group(1)+'('+match.group(2)+')'+'('+match.group(3)+')'
+else:
+	snip.rv = match.group(1)+'('+match.group(2)+')'
+`
+${0:${VISUAL}}
+endsnippet
+
+snippet "([^\s].*)\.up" "Uppercase(postfix)" wr
+`!p snip.rv = match.group(1).upper()`$0
+endsnippet
+
+snippet "([^\s]\w+)\.lo\ " "Lowercase(postfix)" wr
+`!p snip.rv = match.group(1).lower()`$0
+endsnippet
