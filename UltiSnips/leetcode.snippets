@@ -1,0 +1,40 @@
+###########################################################
+#                        LEETCODE                         #
+###########################################################
+snippet two_sum "two num in array" b
+public int[] twoSum(int[] nums, int target) {
+	if(nums == null || nums.length < 2)
+		return new int[]{0, 0};
+	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+	int[] result = new int[2];
+	for (int i = 0; i < numbers.length; i++) {
+		if (map.containsKey(nums[i])) {
+			int index = map.get(nums[i])
+			result[0] = index;
+			result[1] = i;
+			return result;
+		}
+		else
+			map.put(target - number[i], i);
+	}
+	return result;
+}
+endsnippet
+snippet quick_sort "quick sort" b
+algorithm quicksort(Arr, lo, hi) is
+	if lo < hi then
+		p := partition(Arr, lo, hi)
+		quicksort(Arr, lo, p - 1)
+		quicksort(Arr, p + 1, hi)
+
+algorithm partition(Arr, lo, hi) is
+	pivot := Arr[hi]
+	i := lo
+	for j := lo to hi - 1 do
+		if Arr[j] < pivot then
+			if i != j then
+				swap Arr[i] with Arr[j]
+			i := i + 1
+	swap Arr[i] with Arr[hi]
+	return i
+endsnippet

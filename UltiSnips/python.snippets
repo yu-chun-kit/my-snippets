@@ -61,11 +61,12 @@ endsnippet
 snippet immplt "matlib plt" b
 import matplotlib.pyplot as plt
 endsnippet
-snippet pltplot "plt plot" Ab
+snippet pltplot "make line" Ab
 plt.plot(${1:${2:x_val}, ${3:y_val}}, linewidth=${4:5})${0}
 endsnippet
-snippet pltsc "scatter" Ab
-plt.scatter(${1:x}, ${2:y}, c='${3:cornflowerblue}', edgecolor='${4:none}', s=${5:40})${0}
+snippet pltsc "scatter(point)" Ab
+plt.scatter(${1:x}, ${2:y}, c=${3:$2},
+			${4:cmap=plt.cm.Blues, }edgecolor='${5:none}', s=${6:15})${0}
 endsnippet
 snippet pltsh "show plt" Ab
 plt.show()
@@ -82,6 +83,19 @@ endsnippet
 snippet plttkp "tick_params" Ab
 plt.tick_params(axis='${1:}', labelsize=${2:14})${0}
 endsnippet
+snippet pltsave "save figure" Ab
+plt.savefig('${1:pic_name}.png', bbox_inchs='tight')${0}
+endsnippet
+snippet plt_hide_x "hide_x_axis" b
+plt.axes().get_xaxis().set_visible(False)
+endsnippet
+snippet plt_hide_y "hide_y_axis" b
+plt.axes().get_yaxis().set_visible(False)
+endsnippet
+snippet pltfig "config figure" b
+plt.figure(dpi=${1:128}, figsize=(10, 6))${0}
+endsnippet
+
 snippet openfile "with open..."
 filename = "${1:file.txt}"
 with open(filename, "w+") as f_obj:

@@ -19,6 +19,16 @@ snippet studocs "student detail" b
 	Description: a program about${0}
 */
 endsnippet
+snippet studocs2 "student detail" b
+/******************************************
+	Name of Source File: ${1:`!v vim_snippets#Filename('$1.java', 'foo.java')`}
+	Student name (ID): `!v g:snips_student_name`
+	Course Name (Code): `!v g:snips_student_class`
+	Student number: `!v g:snips_student_number`
+	Program Description:
+		a program about${0}
+*******************************************/
+endsnippet
 snippet jv.u "java util" b
 import java.util.${1:*};${0}
 endsnippet
