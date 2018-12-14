@@ -1,0 +1,14 @@
+snippet show_time "Description" b
+var ${1:x} = document.getElementById('${2:}');
+$1.className = "${3:}";
+setTimeout(function() { $1.className = $1.className.replace("$3", ""); }, 3000);
+endsnippet
+snippet get "Get Elements" i
+getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
+endsnippet
+snippet doc "Description" b
+document
+endsnippet
+snippet win "Description" b
+window
+endsnippet

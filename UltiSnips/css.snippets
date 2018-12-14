@@ -1,0 +1,294 @@
+#######################################################################
+#                                 CSS                                 #
+#######################################################################
+snippet '(\w+)\[(.*?)\]' "Emmet like tag expansion" r
+`!p
+tag = match.group(1)
+attributes = ""
+values = [w.split("=") for w in match.group(2).split(",")]
+attributes = " " + " ".join('%s="%s"' % (k,v) for k,v in values)
+snip.rv = "<%s%s></%s>" % (tag, attributes, tag)`
+endsnippet
+snippet c "Description" b
+color: ${1:#000};${0}
+endsnippet
+###############
+#  lazy code  #
+###############
+snippet centering_the_text "Description" b
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #0b0b0b;
+}
+
+h1 {
+	color: #fff;
+	font-family: Source Sans Pro;
+	font-weight: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(50%) translateY(50%);
+}
+endsnippet
+snippet simple_preload "Description" b
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #0b0b0b;
+}
+.loader {
+	margin: 15em 38em;
+	border: 16px solid #e3e3e3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 140px;
+	height: 140px;
+	animation: ping 2s linear infinite;
+}
+
+@keyframes ping {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+endsnippet
+snippet landing_page "Description" b
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	background: url(BG.jpg) 50% 50% no-repeat;
+	background-size: cover;
+	display:table;
+	border-color: ;
+}
+
+.container {
+	margin-top: 220px;
+}
+
+h1 {
+	color: white;
+	font-family: Source Sans Pro;
+	font-weight: 300;
+	font-size: 500%;
+	text-transform: uppdercase;
+	margin-bottom: 0;
+	text-align: center;
+}
+p {
+	color: white;
+	font-family: Source Sans Pro;
+	font-weight: lighter;
+	text-transform: uppercase;
+	letter-spacing: 15px;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 10px;
+}
+@media(max-width: 768px) {
+	h1 {
+		font-size: 300%;
+	}
+	p {
+		font-size: 17px;
+		letter-spacing: 10px;
+	}
+}
+endsnippet
+snippet link_hover "Description" b
+body {
+	margin: 0;
+	padding: 0;
+	background: #0b0b0b;
+}
+
+.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+li {
+	display: inline-block;
+}
+li a {
+	text-decoration: none;
+	font-family: Source, Sans, Pro;
+	font-weight: lighter;
+	font-size: 28px;
+	padding: 0 20px;
+}
+.cool-link::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 2px;
+	background: #fff;
+	transition: width .3s;
+}
+.cool-link:hover::after {
+	width: 100%;
+	transition: width .3s;
+}
+endsnippet
+snippet trs "Description" b
+transform: ${1:translateX(${2:-50%}) translateY(${3:-50%})};${0}
+endsnippet
+snippet bdrs "Description" b
+border-radius: ${1:5px};${0}
+endsnippet
+snippet sign_in_form "Description" b
+html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	background: url(BG.jpg) 50% 50% no-repeat;
+	background-size: cover;
+	display: table;
+}
+
+.signin {
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	/*border: 1px solid rgba(0, 0, 0, 0.3);*/
+	border-radius: 5px;
+	padding: 3em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+h2 {
+	margin-top: 0px;
+	font-family: Source Sans Pro;
+	font-weight: lighter;
+	color: #fff;
+	/*color: #000;*/
+	font-size: 50px;
+	text-align: center;
+}
+
+input {
+	display:block;
+	width: 320px;
+	height: 50px;
+	background: rgba(0, 0, 0, 0.3);
+	/*background: rgba(255, 255, 255, 0.3);*/
+	outline: none;
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	/*border: 1px solid rgba(255, 255, 255, 0.5);*/
+	font-family: Source Sans Pro;
+	font-weight: lighter;
+	font-size: 14px;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	border-radius: 5px;
+}
+
+button {
+	width:332px;
+	height: 50px;
+	font-size: 16px;
+	background: #000;
+	/*background: #fff;*/
+	font-weight: lighter;
+	color: #fff;
+	/*color: #000;*/
+	border: 0px;
+	border-radius: 5px;
+}
+endsnippet
+snippet snackbars "Description" b
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	background: url(BG.jpg) 50% 50% no-repeat;
+	background-size: cover;
+	display: table;
+	text-align: center;
+	font-family: Source Sans Pro;
+}
+
+h1 {
+	color: #fff;
+	/*color: #000;*/
+	font-size: 70px;
+	/*font-weight: lighter;*/
+}
+
+button {
+	width: 300px;
+	height: 50px;
+	border: 2px solid #fff;
+	/*border: 2px solid #000;*/
+	font-weight: 300;
+	color: #fff;
+	/*color: #000;*/
+	background: rgba(0, 0, 0, 0);
+	/*background: rgba(255, 255, 255, 0);*/
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#snackbar {
+	min-width: 300px;
+	margin-left: -150px;
+	visibility: hidden;
+	bottom: 30px;
+	left: 50%;
+	z-index: 1;
+	text-align: center;
+	font-size: 25px;
+	position: absolute;
+	padding: 16px;
+	color: #000;
+	/*color: #fff;*/
+	background: #fff;
+	/*background: #000;*/
+	border-radius: 5px;
+}
+
+#snackbar.show {
+	visibility: visible;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+	from {
+		bottom: 0;
+		opacity: 0;
+	}
+	to {
+		bottom: 30px;
+		opacity: 1;
+	}
+}
+@keyframes fadeout {
+	from {
+		bottom: 30px;
+		opacity: 1;
+	}
+	to {
+		bottom: 0;
+		opacity: 0;
+	}
+}
+endsnippet

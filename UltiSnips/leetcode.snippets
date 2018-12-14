@@ -1,23 +1,17 @@
-###########################################################
-#                        LEETCODE                         #
-###########################################################
-snippet two_sum "two num in array" b
-public int[] twoSum(int[] nums, int target) {
-	if(nums == null || nums.length < 2)
-		return new int[]{0, 0};
-	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-	int[] result = new int[2];
-	for (int i = 0; i < numbers.length; i++) {
-		if (map.containsKey(nums[i])) {
-			int index = map.get(nums[i])
-			result[0] = index;
-			result[1] = i;
-			return result;
+###########
+#  BASIC  #
+###########
+snippet insert_sort "Description" b
+public void insertSort(int[] nums) {
+	for (int j = 1; j < nums.length; j++) {
+		i = j - 1;
+		key = nums[j];
+		while (i >= 0 && key < nums[i]) {
+			nums[i + 1] = nums[i];
+			i--;
 		}
-		else
-			map.put(target - number[i], i);
+		num[i + 1] = key;
 	}
-	return result;
 }
 endsnippet
 snippet quick_sort "quick sort" b
@@ -37,4 +31,46 @@ algorithm partition(Arr, lo, hi) is
 			i := i + 1
 	swap Arr[i] with Arr[hi]
 	return i
+endsnippet
+##########
+#  EASY  #
+##########
+snippet two_sum "two num in array" b
+public int[] twoSum(int[] nums, int target) {
+	if(nums == null || nums.length < 2)
+		return new int[]{0, 0};
+	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+	int[] result = new int[2];
+	for (int i = 0; i < numbers.length; i++) {
+		if (map.containsKey(nums[i])) {
+			int index = map.get(nums[i])
+			result[0] = index;
+			result[1] = i;
+			return result;
+		}
+		else
+			map.put(target - number[i], i);
+	}
+	return result;
+	}
+endsnippet
+/* I think this is useless 
+snippet single_number "ary no repeat num" b
+public int singleNumber(int[] nums) {
+	int res = 0;
+	for (int num: nums) {
+		res ^= nums[i];
+	}
+	return res;
+}
+endsnippet
+snippet single_number2 "3 doub num, find uni" b
+public singleNumber2(int[] nums) {
+	int res1 = 0, res2 = 0;
+	for (int num: nums) {
+		res1 = (res1 ^ num) & ~res2;
+		res2 = (res2 ^ num) & ~res1;
+	}
+	return res1;
+}
 endsnippet
