@@ -2,6 +2,7 @@
 #  global function  #
 #####################
 import os
+import re
 
 
 NORMAL  = 0x1
@@ -51,7 +52,6 @@ def triple_quotes(snip):
     return (SINGLE_QUOTES if style == 'single' else DOUBLE_QUOTES) * 3
 
 
-
 def get_style(snip):
     style = snip.opt("g:ultisnips_python_style", "normal")
 
@@ -92,7 +92,7 @@ def write_docstring_args(args, snip):
         snip.rv += ' {0}'.format(triple_quotes(snip))
         return
 
-    snip.rv += snip.mkline('', indent='') # '\n' +
+    snip.rv += snip.mkline('', indent='')  # '\n' +
 
     style = get_style(snip)
 
@@ -103,7 +103,7 @@ def write_docstring_args(args, snip):
     else:
         pass
         # for arg in args:
-            # snip += format_arg(arg, style)
+        #     snip += format_arg(arg, style)
 
 
 def write_google_docstring_args(args, snip):
@@ -200,11 +200,12 @@ def tranf_clsname(t, snip):
     fname = snip.fn.split('.')[0].title()
     if '_' in fname:
         wind = fname.find('_') + 1
-        classname = fname.replace(fname[wind-1]
-                                  + fname[wind], fname[wind].upper())
+        classname = fname.replace(fname[wind - 1] +
+                                  fname[wind], fname[wind].upper())
     else:
         classname = fname
     return classname
+
 
 def complete(t, opts):
     """TODO: Docstring for complete.
@@ -215,7 +216,65 @@ def complete(t, opts):
 
     """
     if t:
-        opts = [ m for m in opts if m.startwith(t) ]
+        opts = [m for m in opts if m.startwith(t)]
     if len(opts) == 1:
         return opts[0]
     return "(" + '|'.join(opts) + ')'
+
+
+def comment_inline(snip, START="/* ", END=" */"):
+    text = snip.v.text
+    lines = text.split('\n')[:-1]
+    first_line = lines[0]
+    initial_indent = snip._initial_indent
+    spaces = ''
+
+    # Get the first non-empty line
+    for idx, l in enumerate(lines):
+        if l.strip() != '':
+            first_line = lines[idx]
+            sp = re.findall(r'^\s+', first_line)
+            if len(sp):
+                spaces = sp[0]
+            break
+
+    if text.strip().startswith(START):
+        result = text.replace(START, '', 1).replace(END, '', 1)
+    else:
+        result = text.replace(spaces, spaces + START, 1).rstrip('\n') + END + '\n'
+
+    if initial_indent:
+        result = result.replace(initial_indent, '', 1)
+
+    return result
+
+
+def comment(snip, START="", END=""):
+    lines = snip.v.text.split('\n')[:-1]
+    first_line = lines[0]
+    spaces = ''
+    initial_indent = snip._initial_indent
+
+    # Get the first non-empty line
+    for idx, l in enumerate(lines):
+        if l.strip() != '':
+            first_line = lines[idx]
+            sp = re.findall(r'^\s+', first_line)
+            if len(sp):
+                spaces = sp[0]
+            break
+
+    # Uncomment
+    if first_line.strip().startswith(START):
+        result = [line.replace(START, "", 1).replace(END, "", 1) if line.strip() else line for line in lines]
+    else:
+        result = [f'{spaces}{START}{line[len(spaces):]}{END}' if line.strip() else line for line in lines ]
+
+    # Remove initial indent
+    if result[0] and initial_indent:
+        result[0] = result[0].replace(initial_indent, '', 1)
+
+    if result:
+        return '\n'.join(result)
+    else:
+        return ''

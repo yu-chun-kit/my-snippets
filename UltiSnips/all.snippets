@@ -1,7 +1,11 @@
 #######################################################################
 #                      THE SNIP FOR ALL AND NONE                      #
 #######################################################################
-
+global !p
+from useful_func import (
+	comment, comment_inline
+)
+endglobal
 
 priority -50
 
@@ -13,4 +17,14 @@ Johnson Yu
 endsnippet
 snippet MYGITHUB "My github" w
 https://github.com/yu-chun-kit/
+endsnippet
+snippet cmt "comment every single line" b
+`!p
+snip.rv = comment(snip, START='// ', END='')
+`$0
+endsnippet
+snippet icmt "comment inline." b
+`!p
+snip.rv = comment_inline(snip, START="/* ", END=" */")
+`$0
 endsnippet

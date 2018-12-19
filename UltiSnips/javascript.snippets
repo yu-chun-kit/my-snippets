@@ -6,9 +6,74 @@ endsnippet
 snippet get "Get Elements" i
 getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
 endsnippet
-snippet doc "Description" b
+snippet doc "Description" w
 document
 endsnippet
-snippet win "Description" b
+snippet win "Description" w
 window
+endsnippet
+snippet qs "query s" w
+${1:document}.querySelector('${0:CSS selector}')
+endsnippet
+# Query selector all
+snippet qsa "query sa" w
+${1:document}.querySelectorAll('${0:CSS selector}')
+endsnippet
+snippet suffix "Description" b
+const suffix = this.dataset.sizing || "";
+endsnippet
+snippet => "array fun" i
+(${1}) => {
+	${0:${VISUAL}}
+}
+endsnippet
+snippet c=> "const aryfun" w
+const ${1:function_name} = (${2}) => {
+	${0:${VISUAL}}
+}
+endsnippet
+#####################
+#  Array prototype  #
+#####################
+snippet cpwith "copyWithin laslikefr" w
+${1:array}.copyWithin(${2:start}, ${3:shift_start});${0}
+endsnippet
+snippet pop "pop last and remove" w
+${1:array}.pop(${2:0}, ${3:0});${0}
+endsnippet
+snippet fill "fill ary" w
+${1:array}.fill(${2:num}, ${3:start});${0}
+endsnippet
+snippet reverse "reverse ary" w
+${1:array}.reverse();${0}
+endsnippet
+snippet push "push to last" w
+${1:array}.push(${2:element});${0}
+endsnippet
+snippet concat "merge ary" w
+${1:array}.concat(${2:ary2});${0}
+endsnippet
+snippet indexof "elem index" w
+${1:array}.indexof(${2:element});${0}
+endsnippet
+snippet tostring "ary tostring 1,2,3" w
+${1:array}.toString();${0}
+endsnippet
+snippet filter "ary filter" w
+${1:array}.filter(${1:function});${0}
+endsnippet
+snippet sort "ary sort" w
+${1:array}.sort(${2:});${0}
+endsnippet
+snippet map "new ary each" w
+${1:array}.map(${1:function});${0}
+endsnippet
+snippet keys "ary keys" w
+${1:array}.keys(${1:function});${0}
+endsnippet
+snippet reduce "get total" w
+${1:array}.keys(${2:function}, ${3:start});${0}
+endsnippet
+snippet ctb "console.table" b
+console.table(${0:${VISUAL}});
 endsnippet
