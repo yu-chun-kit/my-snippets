@@ -1,21 +1,21 @@
 #########
 #  sql  #
 #########
-snippet slf "select from" b
+snippet tbl "create table" b
+CREATE TABLE ${1:table} (
+	col${0:}
+);
+endsnippet
+snippet col
+${1:name}	${2:type}	${3:DEFAULT ''}	${4:NOT NULL},${0:}
+endsnippet
+snippet sel "select from" b
 SELECT ${1:*} FROM ${2:table}
 WHERE ${3:in/nin/eq/neq/like/nlike/gt/lt}
 ORDER BY ${4:ASC};
 endsnippet
-snippet ctable "create table" b
-CREATE TABLE ${1:`!p snip.rv = t[1].upper()`} {
-	${0}
-}
-endsnippet
-snippet "([^\s]\w+)\.constr" "CONSTRAINT" Ab
+snippet "([^\s]\w+)\.constr" "CONSTRAINT" br
 CONSTRAINT ${1:`!p snip.rv = match.group(1)`}${0}
-endsnippet
-snippet dbg "if (DEVELOPMENT) dbg" "re.match('^if \(DEVELOPMENT\) \{', snip.buffer[snip.line-1])" be
-debugger;
 endsnippet
 
 snippet "([\d]+)([\w])([iv]*)\)" "answer" brA
@@ -28,10 +28,37 @@ else:
 ${0:${VISUAL}}
 endsnippet
 
-snippet "([^\s].*)\.up" "Uppercase(postfix)" wr
-`!p snip.rv = match.group(1).upper()`$0
+snippet ind "index" b
+	CREATE INDEX ${0:$1_$2} ON ${1:table}(${2:column});
+endsnippet
+snippet uind "unique ind" b
+	CREATE UNIQUE INDEX ${1:name} ON ${2:table}(${0:column});
 endsnippet
 
-snippet "([^\s]\w+)\.lo\ " "Lowercase(postfix)" wr
-`!p snip.rv = match.group(1).lower()`$0
+snippet tblcom "tbl comment" b
+	COMMENT ON TABLE ${1:table} IS '${0:comment}';
+endsnippet
+snippet colcom "col comment" b
+	COMMENT ON COLUMN ${1:table}.${2:column} IS '${0:comment}';
+endsnippet
+##########
+#  word  #
+##########
+snippet constr "constraint" w
+CONSTRAINT 
+endsnippet
+snippet ref "ref" w
+REFERENCES 
+endsnippet
+snippet fk "FK" w
+FOREIGN KEY 
+endsnippet
+snippet pk "PK" w
+PRIMARY KEY 
+endsnippet
+snippet val "values" w
+VALUES(${1});${0}
+endsnippet
+snippet ins "INSERT INTO" b
+INSERT INTO ${1:tbl_name} VALUES(${2:});${0}
 endsnippet

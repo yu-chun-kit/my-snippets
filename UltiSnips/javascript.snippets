@@ -13,19 +13,17 @@ snippet win "Description" w
 window
 endsnippet
 snippet qs "query s" w
-${1:document}.querySelector('${0:CSS selector}')
+querySelector('${1:CSS selector}')${0}
 endsnippet
 # Query selector all
 snippet qsa "query sa" w
-${1:document}.querySelectorAll('${0:CSS selector}')
+querySelectorAll('${1:CSS selector}')${0}
 endsnippet
 snippet suffix "Description" b
 const suffix = this.dataset.sizing || "";
 endsnippet
 snippet => "array fun" i
-(${1}) => {
-	${0:${VISUAL}}
-}
+(${1}) => { ${0:${VISUAL}} }
 endsnippet
 snippet c=> "const aryfun" w
 const ${1:function_name} = (${2}) => {
@@ -35,45 +33,85 @@ endsnippet
 #####################
 #  Array prototype  #
 #####################
-snippet cpwith "copyWithin laslikefr" w
-${1:array}.copyWithin(${2:start}, ${3:shift_start});${0}
-endsnippet
 snippet pop "pop last and remove" w
 ${1:array}.pop(${2:0}, ${3:0});${0}
 endsnippet
-snippet fill "fill ary" w
+snippet fill "value(df:all), (start, (end))" w
 ${1:array}.fill(${2:num}, ${3:start});${0}
 endsnippet
 snippet reverse "reverse ary" w
-${1:array}.reverse();${0}
+reverse()${0}
 endsnippet
 snippet push "push to last" w
-${1:array}.push(${2:element});${0}
+push(${1:element})${0}
 endsnippet
 snippet concat "merge ary" w
-${1:array}.concat(${2:ary2});${0}
+concat(${1:ary2})${0}
 endsnippet
 snippet indexof "elem index" w
-${1:array}.indexof(${2:element});${0}
+indexof(${1:element});${0}
 endsnippet
 snippet tostring "ary tostring 1,2,3" w
-${1:array}.toString();${0}
+toString();${0}
 endsnippet
 snippet filter "ary filter" w
-${1:array}.filter(${1:function});${0}
+filter(${1:function});${0}
 endsnippet
 snippet sort "ary sort" w
-${1:array}.sort(${2:});${0}
+sort(${1:});${0}
 endsnippet
-snippet map "new ary each" w
-${1:array}.map(${1:function});${0}
+snippet map "new ary with calling function on every elem" w
+map(${1:function});${0}
 endsnippet
-snippet keys "ary keys" w
-${1:array}.keys(${1:function});${0}
+snippet keys "ret obj of index of key eg012..." w
+.keys(${1:function});${0}
 endsnippet
-snippet reduce "get total" w
-${1:array}.keys(${2:function}, ${3:start});${0}
+snippet reduce "reducer function on each elem resulting 1 value" w
+keys(${1:function}, ${2:start});${0}
+endsnippet
+snippet foreach "forEach" w
+forEach((${2:item}) => {
+	${0}
+})
+endsnippet
+snippet some "a less one true will return true" w
+some(${1:})i;
 endsnippet
 snippet ctb "console.table" b
 console.table(${0:${VISUAL}});
+endsnippet
+snippet ael "addEventL..." w
+addEventListener(${0})
+endsnippet
+snippet numcomma "comma with 3 num" b
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+endsnippet
+snippet search_bar "search city example" b
+f(word, city)
+	return by filter
+	for each place in city {
+		declare RegExp(word, "gi")
+		if space
+			return ""
+		else
+			return either(||) string.match method with regex eg(place.city.match(regex))
+	}
+const match_city = findMatches(this.value, cities).slice(0, 5);
+const innerhtml = match_city.map(place => {
+	return `
+		<li>
+			<span class="name">${place.city}, ${place.state}</span>
+			<span class="population">${numberWithCommas(place.population)}</span>
+		</li>
+	`;
+}).join('');
+suggestions.innerHTML = innerhtml;
+endsnippet
+snippet canvas_ctx "" b
+const ctx canvas.getContext('2d');
+ctx.strokeStyle = '#BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
 endsnippet

@@ -1,14 +1,14 @@
 #######################################################################
 #                                 CSS                                 #
 #######################################################################
-snippet '(\w+)\[(.*?)\]' "Emmet like tag expansion" r
-`!p
-tag = match.group(1)
-attributes = ""
-values = [w.split("=") for w in match.group(2).split(",")]
-attributes = " " + " ".join('%s="%s"' % (k,v) for k,v in values)
-snip.rv = "<%s%s></%s>" % (tag, attributes, tag)`
-endsnippet
+#snippet '(\w+)\[(.*?)\]' "Emmet like tag expansion" r
+#`!p
+#tag = match.group(1)
+#attributes = ""
+#values = [w.split("=") for w in match.group(2).split(",")]
+#attributes = " " + " ".join('%s="%s"' % (k,v) for k,v in values)
+#snip.rv = "<%s%s></%s>" % (tag, attributes, tag)`
+#endsnippet
 snippet c "Description" b
 color: ${1:#000};${0}
 endsnippet
@@ -33,7 +33,6 @@ h1 {
 }
 endsnippet
 snippet simple_preload "Description" b
-
 body {
 	margin: 0;
 	padding: 0;

@@ -92,7 +92,7 @@ def write_docstring_args(args, snip):
         snip.rv += ' {0}'.format(triple_quotes(snip))
         return
 
-    snip.rv += snip.mkline('', indent='')  # '\n' +
+    # snip.rv += snip.mkline('', indent='')  # '\n' +
 
     style = get_style(snip)
 
@@ -187,7 +187,7 @@ def write_function_docstring(t, snip):
         snip += 'TODO'
     else:
         snip += format_return(style)
-    snip.rv += '\n' + snip.mkline('', indent='')
+    # snip.rv += '\n' + snip.mkline('', indent='')
     snip += triple_quotes(snip)
 
 
@@ -223,7 +223,10 @@ def complete(t, opts):
 
 
 def comment_inline(snip, START="/* ", END=" */"):
-    text = snip.v.text
+    if snip.v.text:
+        text = snip.v.text
+    else:
+        return None
     lines = text.split('\n')[:-1]
     first_line = lines[0]
     initial_indent = snip._initial_indent
@@ -239,9 +242,9 @@ def comment_inline(snip, START="/* ", END=" */"):
             break
 
     if text.strip().startswith(START):
-        result = text.replace(START, '', 1).replace(END, '', 1)
+        result = text.replace(START, '', 1).replace(END, '', 1).rstrip('\n')
     else:
-        result = text.replace(spaces, spaces + START, 1).rstrip('\n') + END + '\n'
+        result = text.replace(spaces, spaces + START, 1).rstrip('\n') + END  # + '\n'
 
     if initial_indent:
         result = result.replace(initial_indent, '', 1)
@@ -250,7 +253,10 @@ def comment_inline(snip, START="/* ", END=" */"):
 
 
 def comment(snip, START="", END=""):
-    lines = snip.v.text.split('\n')[:-1]
+    if snip.v.text:
+        lines = snip.v.text.split('\n')[:-1]
+    else:
+        return None
     first_line = lines[0]
     spaces = ''
     initial_indent = snip._initial_indent
@@ -268,13 +274,13 @@ def comment(snip, START="", END=""):
     if first_line.strip().startswith(START):
         result = [line.replace(START, "", 1).replace(END, "", 1) if line.strip() else line for line in lines]
     else:
-        result = [f'{spaces}{START}{line[len(spaces):]}{END}' if line.strip() else line for line in lines ]
+        result = [f'{spaces}{START}{line[len(spaces):]}{END}' if line.strip() else line for line in lines]
 
     # Remove initial indent
     if result[0] and initial_indent:
         result[0] = result[0].replace(initial_indent, '', 1)
 
     if result:
-        return '\n'.join(result)
+        return '\n'.join(result).rstrip()
     else:
         return ''

@@ -2,10 +2,15 @@
 #  python  #
 ############
 global !p
-from useful_func import {
-	tranf_clsname, write_init_body, triple_quotes, get_args, write_docstring_args
-}
+from useful_func import (tranf_clsname, write_init_body, write_function_docstring,
+						 triple_quotes, get_args, write_docstring_args)
 endglobal
+snippet deff "function" b
+def ${1:function}(`!p
+if snip.indent:
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	${5:${VISUAL:pass}}
+endsnippet
 
 snippet true "" wA
 True
@@ -15,6 +20,9 @@ False
 endsnippet
 snippet none "" wA
 None
+endsnippet
+snippet slef "" wA
+self
 endsnippet
 snippet mn "main function"
 def ${1:`!p snip.rv = fn.split('.')[0]`}(${2:}):
@@ -33,6 +41,7 @@ Filename: ${1:`!v vim_snippets#Filename('$1.py', 'foo.py')`}
 Programmer: `!v g:snips_author`
 Email: `!v g:snips_email`
 Github: `!v g:snips_github`
+Date : `!v strftime("%Y-%m-%d")`
 Description: ${2:useless program}
 """
 ${0:}
@@ -43,6 +52,7 @@ Filename: ${1:`!v vim_snippets#Filename('$1.py', 'foo.py')`}
 Student name: `!v g:snips_student_name`
 Class: `!v g:snips_student_class`
 Student number: `!v g:snips_student_number`
+Date : `!v strftime("%Y-%m-%d")`
 Description: a program about${0}
 """
 endsnippet
@@ -99,10 +109,17 @@ endsnippet
 
 snippet openfile "with open..."
 filename = "${1:file.txt}"
-with open(filename, "r+") as f_obj:${2:
-	for i in range(0):
-		f.next()}
+with open(filename, "${2:r+}") as f_obj:
 	${3:contents = f_obj.read()}${0}
+endsnippet
+snippet get_json "get json" b
+filename = "${1:file.json}"
+with open(filename, "${2:w+}") as f_obj:
+	json.dump(data, f_obj){0}
+endsnippet
+snippet opennext "Description" b
+for i in range(${1:0}):
+	f_obj.next()${0}
 endsnippet
 snippet cl "class with docstrings" b
 class ${1:`!p snip.rv = tranf_clsname(t, snip)`}(${2:object}):
@@ -116,7 +133,7 @@ args = get_args(t[4])
 
 write_docstring_args(args, snip)
 if args:
-	snip.rv += '\n' + snip.mkline('', indent='')
+	#snip.rv += '\n' + snip.mkline('', indent='')
 	snip += '{0}'.format(triple_quotes(snip))
 
 write_init_body(args, t[2], snip)`
@@ -142,15 +159,29 @@ def nCr(n,r):
 endsnippet
 snippet pyg_hist "pygal histogram" b
 ${1:hist} = pygal.Bar()
-$1.title = "${2:Title Name}"
-$1.x_labels = [${3}]
+$1.title = "${2:Title}"
+$1.x_labels = ${3}
 $1.x_title = "${4:Results}"
 $1.y_title = "${5:Frequency}"
 
 $1.add('$4', ${6})
-$1.render_to_file('`!p snip.rv = fn.split('.')[0]`.svg')${0}
+$1.render_to_file('$2')${0}
 endsnippet
-
+snippet pyg_line "pygal lineChart" b
+${1:line_chart} = pygal.Line(x_label_rotation=20, show_minor_x_labels=False)
+$1.title = "${2:Title}"
+$1.x_labels = ${3}
+N = ${4:20}
+$1.x_labels_major = $3[::N]
+$1.add("$5", ${5})
+$1.render_to_file('$2')${0}
+endsnippet
+snippet imppygstyle "pyg lightStyle" b
+from pygal.style import LightColorizedStyle as LCS, LightenStyle as LS
+endsnippet
+snippet line_log "log chart" b
+close_log = [math.log10(_) for _ in close]
+endsnippet
 snippet fore "for enumerate" b
 for ${1:index}, ${2:item} in enumerate(${3:iterable}):
 	${0:print($1, $2)}
@@ -176,6 +207,7 @@ plt.title("${3:title}", fontsize=24)
 plt.xlabel("${4:x_title}", fontsize=${6:14})
 plt.ylabel("${5:y_title}", fontsize=$6)
 plt.tick_params(axis='both', which='major', labelsize=$6)
+plt.legend(loc='upper right')
 plt.show()${0}
 endsnippet
 snippet figauf "fig autofx" b
@@ -183,4 +215,48 @@ fig.autofmt_xdate()
 endsnippet
 snippet pltfillbt "fill between" b
 plt.fill_between(${1:x, y1, y2=0,} facecolor='blue', alpha=0.1)${0}
+endsnippet
+snippet impurl "Description" b
+try:
+	from urllib2 import urlopen
+except ImportError:
+	from urllib.request import urlopen
+endsnippet
+snippet draw_html "Description" b
+with open('${1:FileName}.html', 'w', encoding='utf8') as html_file:
+	msg = "<html> <head> <title>${2:html_title}</title> <meta"
+	msg += " charset=\"utf-8\">\"</head><body>\n"
+	html_file.write(msg)
+	for svg in [
+		${3:pyg_files}
+	]:
+		msg = '   <object type="image/svg+xml" data="{0}"'
+		msg += '${4:height=500}></object>\n'
+		html_file.write(msg.format(svg))
+	html_file.write("</body> </html>")${0}
+endsnippet
+snippet req_json "store req json" b
+URL = "${1:json_address}"
+r = requests.get(URL)
+print("Status code:", r.status_code)
+with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', 'w') as f:
+	f.write(r.text)
+file_requests = req.json()
+endsnippet
+snippet def "function with docstrings" b
+def ${1:function}(`!p
+if snip.indent:
+	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
+write_function_docstring(t, snip) `
+	${0:${VISUAL:pass}}
+endsnippet
+
+snippet argpAP "argu parser" b
+parser = argparse.ArgumentParser(description="${1:Description of function.}",
+								 formatter_class=argparse.ArgumentDefaultsHelpFormatter)${0}
+endsnippet
+snippet argpAA "add arguments" b
+parser.add_argument("${1:}", metavar="$1", type=str,
+					help="${2:the source URL of imgur}")${0}
 endsnippet
