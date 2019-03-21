@@ -74,23 +74,8 @@ public String toString() {
 	return ${1:String};
 }${0}
 endsnippet
-snippet jutil "import util library" b
-import java.util.${1:*};${0}
-endsnippet
-snippet jlang "import lang library" b
-import java.lang.${1:*};${0}
-endsnippet
-snippet jmath "import math library" b
-import java.math.${1:*};${0}
-endsnippet
-snippet jxjop "import jxjop" b
-import javax.swing.JOptionPane;
-endsnippet
 snippet boo "boolean" w
 boolean 
-endsnippet
-snippet impl "Description" w
-implements 
 endsnippet
 snippet m "void main" b
 ${1:private} ${2:void} ${3:method}($4) {
@@ -104,4 +89,48 @@ while(${1:true}) {
 endsnippet
 snippet Obj "Object" w
 Object 
+endsnippet
+
+snippet inf "interface" b
+interface ${1:`!p
+snip.rv = snip.basename or "untitled"`} {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet cl "class" b
+public class ${1:`!p
+snip.rv = snip.basename or "untitled"`} {
+	${0:${VISUAL}}
+}
+endsnippet
+
+snippet j_b "java_beans" i
+java.beans.
+endsnippet
+
+snippet j_i "java_io" i
+java.io.
+endsnippet
+
+snippet j_m "java_math" i
+java.math.
+endsnippet
+
+snippet j_n "java_net_" i
+java.net.
+endsnippet
+
+snippet j_u "java_util_"  i
+java.util.
+endsnippet
+
+snippet jlang "import lang library" w
+java.lang.${1:*};${0}
+endsnippet
+snippet jmath "import math library" w
+java.math.${1:*};${0}
+endsnippet
+snippet jxjop "import jxjop" b
+import javax.swing.JOptionPane;
 endsnippet

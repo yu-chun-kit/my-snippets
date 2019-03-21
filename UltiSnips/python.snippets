@@ -260,3 +260,57 @@ snippet argpAA "add arguments" b
 parser.add_argument("${1:}", metavar="$1", type=str,
 					help="${2:the source URL of imgur}")${0}
 endsnippet
+snippet imptk "tkinter" b
+import tkinter as tk
+endsnippet
+
+snippet tkCanvas "Canvas" b
+window = tk.Tk()
+canvas = tk.Canvas(window, width=500, height=500)
+canvas.pack()
+endsnippet
+
+snippet de8 "decode utf8" w
+decode('utf8')
+endsnippet
+
+snippet cftime "curr time" b
+time.strftime('%Y-%m-%d', time.localtime())
+endsnippet
+
+snippet cvgray "opencv gray" b
+gray = cv2.cvtColor(${1:var}, cv2.COLOR_BGR2GRAY)${0}
+
+endsnippet
+snippet quitcv "quit opencv" b
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+if cv2.waitKey(20) & 0xff == ord('q'):
+	break
+endsnippet
+
+snippet cvbright "cv brightness" b
+filename = "nekopara.jpg"
+image = cv2.imread(filename)
+if image is None:
+	print('Could not open or find the image: ', filename)
+	exit(0)
+new_image = image.copy()
+contrast = 1.0     # 1 to 3
+brightness = 0        # 0 to 100
+for y in range(image.shape[0]):
+	for x in range(image.shape[1]):
+		for c in range(image.shape[2]):
+			new_image[y, x, c] = np.clip(contrast * image[y, x, c] + brightness, 0, 255)
+
+cv2.imshow('funny pic', new_image)
+endsnippet
+snippet cvread "read file" b
+filename = os.getcwd() + "/" + os.argv[1]
+image = cv2.imread(filename)
+imgGrey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+if image is None:
+	print('Could not open or find the image: ', filename)
+	exit(0)
+new_image = image.copy()
+endsnippet
