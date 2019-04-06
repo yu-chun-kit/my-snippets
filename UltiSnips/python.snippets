@@ -109,17 +109,17 @@ endsnippet
 
 snippet openfile "with open..."
 filename = "${1:file.txt}"
-with open(filename, "${2:r+}") as f_obj:
-	${3:contents = f_obj.read()}${0}
+with open(filename, "${2:r+}") as fp:
+	${3:contents = fp.read()}${0}
 endsnippet
 snippet get_json "get json" b
 filename = "${1:file.json}"
-with open(filename, "${2:w+}") as f_obj:
-	json.dump(data, f_obj){0}
+with open(filename, "${2:w+}") as fp:
+	json.dump(data, fp){0}
 endsnippet
 snippet opennext "Description" b
 for i in range(${1:0}):
-	f_obj.next()${0}
+	fp.next()${0}
 endsnippet
 snippet cl "class with docstrings" b
 class ${1:`!p snip.rv = tranf_clsname(t, snip)`}(${2:object}):
@@ -279,7 +279,7 @@ time.strftime('%Y-%m-%d', time.localtime())
 endsnippet
 
 snippet cvgray "opencv gray" b
-gray = cv2.cvtColor(${1:var}, cv2.COLOR_BGR2GRAY)${0}
+gy_$1 = cv2.cvtColor(${1:var}, cv2.COLOR_BGR2GRAY)${0}
 
 endsnippet
 snippet quitcv "quit opencv" b
@@ -290,7 +290,7 @@ if cv2.waitKey(20) & 0xff == ord('q'):
 endsnippet
 
 snippet cvbright "cv brightness" b
-filename = "nekopara.jpg"
+filename = "${1:nekopara.jpg}"
 image = cv2.imread(filename)
 if image is None:
 	print('Could not open or find the image: ', filename)
@@ -313,4 +313,35 @@ if image is None:
 	print('Could not open or find the image: ', filename)
 	exit(0)
 new_image = image.copy()
+endsnippet
+snippet impScrsel "scrapy" b
+from scrapy.selector import Selector
+endsnippet
+snippet scr_xpath "Xpath" w
+item['${1:item_name}'] = sub.xpath('/${2:tag}').extract()${0}
+endsnippet
+snippet scr_css "Css" w
+subSelector.css('/${1:*}').extract()${0}
+endsnippet
+snippet numpy "import np" b
+import numpy as np
+endsnippet
+snippet npar "np.array" w
+np.array([
+	${0}
+])
+endsnippet
+snippet djg_admin "admin.py template" b
+from learning_logs.models import Topic, Entry
+
+admin.site.register(Topic)
+admin.site.register(Entry)
+endsnippet
+snippet imp_colab "colab" b
+from google.colab import files
+
+with open('test.txt', 'w') as f:
+	f.write('hello students!!!')
+
+files.download('test.txt')
 endsnippet

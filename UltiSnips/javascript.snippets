@@ -115,3 +115,7 @@ ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 endsnippet
+snippet ctx_bgcolor "bgcolor of ctx" b
+ctx.fillStyle = '${1:black}';
+ctx.fillRect(0,0,canvas.width, canvas.height);${0}
+endsnippet
