@@ -1,5 +1,6 @@
 extends css
 extends javascript
+extends html-bootstrap
 snippet ngindex "Basic Angular Bootstrap (For Prototyping)"
 <html>
 <head>
@@ -72,4 +73,88 @@ snippet script "script" b
 </script>
 endsnippet
 
+snippet option "Option" w
+<option${1: value="${2:opt}"}>${3:$2}</option>
+endsnippet
+
+snippet prodAdd "" b
+<div class="col s12 m4" id="product$2">
+	<div class="card">
+		<div class="card-image">
+			<img src="images/top seller/${1:Gasket}.jpg" alt="product">
+			<a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal${2:1}">
+				<i class="material-icons">shopping_cart</i>
+			</a>
+		</div>
+		<div class="card-content" style="height: 200px"> <span class="card-title">${4:FS3040DSX}</span>
+			<p>${3:Talbros Dyna Seal Gasket for Maruti Car/Van Full Set(Car). Pictures are generic. Actual product may
+				differ. }</p>
+		</div>
+	</div>
+	<div id="modal$2" class="modal">
+		<div class="modal-content">
+			<table id="detail$2" class="striped highlight center">
+				<tr> <th>Part number</th> <td>$2</td> </tr>
+				<tr> <th>Part name</th> <td>$4</td> </tr>
+				<tr> <th>Stock Quantity</th> <td>666</td> </tr>
+				<tr> <th>Stock Price</th> <td>\$777.77</td> </tr>
+				<tr> <th>Stock Status</th> <td>Available</td> </tr>
+			</table>
+		</div>
+		<div class="modal-footer">
+			<form action="">
+				<div class="input-field col s9">
+					<input id="qty$2" min="1" value="1" type="number" required>
+					<label for="qty$2">Quantity</label>
+				</div>
+				<div class="input-field col s3">
+					<a href="#" class="btn waves-effect waves-light col s12" onclick="addCart($2)">Add to cart</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>${0}
+endsnippet
+snippet tphp "Description" w
+<?php echo ${0}; ?>
+endsnippet
+
+snippet jqdatatable "" b
+<div id="content-wrapper">
+<div class="container-fluid">
+	<div class="card mb-3">
+		<div class="card-header">Data Table Test</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Position</th>
+							<th>Office</th>
+							<th>Age</th>
+							<th>Start date</th>
+							<th>Salary</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Tiger Nixon</td>
+							<td>System Architect</td>
+							<td>Edinburgh</td>
+							<td>61</td>
+							<td>2011/04/25</td>
+							<td>$320,800</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+endsnippet
+
 # vim:ft=snippets:
+
+

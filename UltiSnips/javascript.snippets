@@ -13,11 +13,11 @@ snippet win "Description" w
 window
 endsnippet
 snippet qs "query s" w
-querySelector('${1:CSS selector}')${0}
+document.querySelector('${1:CSS selector}')${0}
 endsnippet
 # Query selector all
 snippet qsa "query sa" w
-querySelectorAll('${1:CSS selector}')${0}
+document.querySelectorAll('${1:CSS selector}')${0}
 endsnippet
 snippet suffix "Description" b
 const suffix = this.dataset.sizing || "";
@@ -118,4 +118,99 @@ endsnippet
 snippet ctx_bgcolor "bgcolor of ctx" b
 ctx.fillStyle = '${1:black}';
 ctx.fillRect(0,0,canvas.width, canvas.height);${0}
+endsnippet
+
+snippet splice_word "restrict word sizes" b
+pressed.splice(-keyWord.length - 1, pressed.length - keyWord.length);
+endsnippet
+
+snippet debounce "debounce" b
+function debounce(func, wait = 20, immediate = true) {
+	var timeout;
+	return function() {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}
+endsnippet
+
+snippet js_form_value "get form_value by method" b
+function getFormValues(form) {
+	var inputs = form.getElementsByTagName('input');
+	var controls = form.controls;
+	var msg = "";
+	for (var i=0, iLen=inputs.length; i<iLen; i++) {
+		var name = inputs[i].getAttribute('id');
+		var value = inputs[i].value;
+		msg = msg + name + " : " + value + "\n";
+	}
+	alert(msg);
+	// Prevent form submission
+	return false;
+}
+endsnippet
+snippet list_innerText "list innerText" b
+var x = document.querySelectorAll("${1}");
+var z = [];
+x.forEach((y) => {
+	z.push(y.innerText);
+})
+console.log(z);${0}
+endsnippet
+
+snippet canvas_supp "support canvas check" b
+var canvas = document.getElementById('${1:canv}');
+
+if (canvas.getContext){
+	var ctx = canvas.getContext('2d');
+	// drawing code here
+} else {
+	// canvas-unsupported code here
+}${0}
+endsnippet
+snippet getFormValues "" b
+function getFormValues(form) {
+	form.preventDefault();
+	// onsubmit="getFormValues(this)"
+	var inputs = form.getElementsByTagName('input');
+	var msg = "";
+	for (var i=0, iLen=inputs.length; i<iLen; i++) {
+		var name = inputs[i].getAttribute('name');
+		if (name == null) {
+			name = inputs[i].getAttribute('id');
+		}
+		var value = inputs[i].value;
+		msg = msg + name + " : " + value + "\n";
+	}
+	alert(msg);
+	return false;
+}
+endsnippet
+
+snippet listCookies "Description" b
+function listCookies() {
+	var theCookies = document.cookie.split(';');
+	var aString = '';
+	for (var i = 1 ; i <= theCookies.length; i++) {
+		aString += i + ' ' + theCookies[i-1] + "\n";
+	}
+	return aString;
+}
+endsnippet
+
+snippet getId "get doc id" b
+var ${1:a} = document.getElementById("$1");$0
+endsnippet
+snippet getCls "get doc class" b
+var ${1:a} = document.getElementsByClassName("$1");$0
+endsnippet
+snippet getTn "get doc tag name" b
+var ${1:a} = document.getElementsByTagName("$1");$0
 endsnippet

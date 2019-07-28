@@ -216,11 +216,12 @@ endsnippet
 snippet pltfillbt "fill between" b
 plt.fill_between(${1:x, y1, y2=0,} facecolor='blue', alpha=0.1)${0}
 endsnippet
-snippet impurl "Description" b
+snippet impUrlopen "Description" b
 try:
 	from urllib2 import urlopen
 except ImportError:
 	from urllib.request import urlopen
+from bs4 import BeautifulSoup
 endsnippet
 snippet draw_html "Description" b
 with open('${1:FileName}.html', 'w', encoding='utf8') as html_file:
@@ -332,10 +333,10 @@ np.array([
 ])
 endsnippet
 snippet djg_admin "admin.py template" b
-from learning_logs.models import Topic, Entry
+from ${1:learning_logs}.models import Topic, Entry
 
 admin.site.register(Topic)
-admin.site.register(Entry)
+admin.site.register(Entry)${0}
 endsnippet
 snippet imp_colab "colab" b
 from google.colab import files
@@ -344,4 +345,90 @@ with open('test.txt', 'w') as f:
 	f.write('hello students!!!')
 
 files.download('test.txt')
+endsnippet
+snippet impSel "chrome driver" b
+#from selenium import webdriver
+path = "/usr/local/bin/chromedriver"
+#browser = webdriver.Firefox()
+driver = webdriver.Chrome(path)${0}
+endsnippet
+
+snippet selConf "selenium example" b
+driver.get('http://www.cwb.gov.tw/V7/')
+driver.set_window_position(0,0) #瀏覽器位置
+driver.set_window_size(700,700) #瀏覽器大小
+
+driver.find_element_by_link_text('天氣預報').click() #點擊頁面上"天氣預報"的連結
+endsnippet
+
+snippet djModel "django model" b
+# import datetime
+# from django.db import models
+# from django.utils import timezone
+class Food(models.Model):
+	# id = models.AutoField(primary_key=True)
+	food_name = models.CharField(max_length=30)
+	price_name = models.DecimalField(max_digits=3, decimal_places=0)
+	food_vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE) # 代表這食物是由哪一個攤販所做的
+	make_date = models.DateTimeField('date made')
+	description = models.CharField(max_length=255, blank=True)  # blank == ---, null == ""
+
+	def __str__(self):
+		return self.choice_text
+
+	def was_published_recently(self):	# need datetime, and timezone(dj utils)
+		now = timezone.now()
+		return now - datetime.timedelta(days=1) <= self.make_date <= now
+	was_published_recently.admin_order_field = 'make_date'
+	was_published_recently.boolean = True
+	was_published_recently.short_description = 'Published recently?'
+endsnippet
+
+snippet impdjContrib "" b
+from django.contrib import admin, auth  # admin=>urls&admin, auth=>views
+from django.contrib.auth.decorators import login_required
+# @login_required
+endsnippet
+
+snippet impdjHttp "" b
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+endsnippet
+
+snippet impdjUrls "" b
+from django.urls import include, path, reverse
+endsnippet
+
+snippet impdjShortcut "" b
+from django.shortcuts import get_object_or_404, render  # all views
+endsnippet
+
+snippet impdjUtil "" b
+from django.utils import timezone
+endsnippet
+
+snippet impdjTemp "" b
+from django.template import loader
+endsnippet
+
+snippet impdjView "" b
+from django.views import generic
+endsnippet
+
+snippet djAddapp "Description" b
+'${1:polls}.apps.$1Config',${0}
+endsnippet
+
+snippet djAuth "auth" b
+user = auth.authenticate(username=username, password=password)
+if user is not None:
+	auth.login(request, user)
+	response = HttpResponseRedirect(reverse('sign:event'))
+	request.session['user'] = username
+	return response
+endsnippet
+
+snippet bsFind "find with bs4" b
+html = urlopen('${1:file:./example.html}')
+bs = BeautifulSoup(html.read(), 'html.parser')
+elem = bs.find${0}
 endsnippet

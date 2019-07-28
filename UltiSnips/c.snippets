@@ -2,13 +2,14 @@
 #  C LANGUAGE  #
 ################
 snippet docs
-	/*
-		Filename: ${1:`!v vim_snippets#Filename('$1.c', 'foo.c')`}
-		Programmer: `g:snips_author`
-		Email: `g:snips_email`
-		Github: `g:snips_github`
-		Description: a program about ${0: }
-	*/
+/*
+	Filename: ${1:`!v vim_snippets#Filename('$1.c', 'foo.c')`}
+	Programmer: `!v g:snips_author`
+	Email: `!v g:snips_email`
+	Github: `!v g:snips_github`
+	Date : `!v strftime("%Y-%m-%d")`
+	Description: a program about ${2: }
+*/${0}
 endsnippet
 snippet mn "main function" b
 int main() {

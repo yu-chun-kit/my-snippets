@@ -134,3 +134,24 @@ endsnippet
 snippet jxjop "import jxjop" b
 import javax.swing.JOptionPane;
 endsnippet
+snippet read_file "" b
+Path path = Paths.get("${1:/myfolder/myfile.ext}");
+try (BufferedReader reader = Files.newBufferedReader(path)) {
+	// Read from the stream
+	String currentLine = null;
+	while ((currentLine = reader.readLine()) != null)
+		//do your code here
+		${0}
+} catch (IOException e) {
+	// Handle file I/O exception...
+}
+endsnippet
+snippet write_txt_file "" b
+Path path = Paths.get("${1:/myfolder/myfile.ext}");
+try (BufferedWriter writer = Files.newBufferedWriter(file)) {
+	writer.append("Zero header: ").append('0').write("\r\n"); //example
+	${0}
+} catch (IOException e) {
+	// Handle file I/O exception...
+}
+endsnippet

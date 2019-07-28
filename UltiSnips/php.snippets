@@ -1,0 +1,29 @@
+
+
+snippet getAjax "Description" b
+$.ajax({
+	type: 'POST',
+	url: 'php/${1:phpfile}',
+	dataType: 'text',
+	data: {
+		'dealerName': $("#${2:id}").val()
+	},
+	success: function (result) {
+		if (result == 'ok') {
+			M.toast({html: "Edit success", displayLength: 1000});
+		} else {
+			M.toast({html: result, displayLength: 1000});
+		}
+	},
+	error: function (err) {
+		M.toast({html: err.responseText, displayLength: 1000});
+	}
+});
+endsnippet
+
+snippet sqlinj "prevent sqlinj" b
+$sql = $conn->prepare("select * from ${1:tblname} where ${2:attr} = ?");
+$sql->bind_param('s', $$2);
+$sql->execute();
+$errorMes = $conn -> error;
+endsnippet
