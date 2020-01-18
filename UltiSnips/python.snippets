@@ -347,18 +347,24 @@ with open('test.txt', 'w') as f:
 files.download('test.txt')
 endsnippet
 snippet impSel "chrome driver" b
-#from selenium import webdriver
+# brew cask upgrade chromedriver
+from selenium import webdriver
 path = "/usr/local/bin/chromedriver"
 #browser = webdriver.Firefox()
-driver = webdriver.Chrome(path)${0}
+driver = webdriver.Chrome(path)
+${0}
 endsnippet
 
 snippet selConf "selenium example" b
-driver.get('http://www.cwb.gov.tw/V7/')
+driver.get('${1:http://www.cwb.gov.tw/V7/}')
 driver.set_window_position(0,0) #瀏覽器位置
 driver.set_window_size(700,700) #瀏覽器大小
 
-driver.find_element_by_link_text('天氣預報').click() #點擊頁面上"天氣預報"的連結
+driver.find_element_by_link_text('天氣').click() #點擊頁面上"天氣"的連結
+endsnippet
+
+snippet selClass "Description" w
+find_elements_by_class_name("${2:}")
 endsnippet
 
 snippet djModel "django model" b
@@ -414,6 +420,10 @@ snippet impdjView "" b
 from django.views import generic
 endsnippet
 
+snippet impdjPage "" b
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+endsnippet
+
 snippet djAddapp "Description" b
 '${1:polls}.apps.$1Config',${0}
 endsnippet
@@ -431,4 +441,80 @@ snippet bsFind "find with bs4" b
 html = urlopen('${1:file:./example.html}')
 bs = BeautifulSoup(html.read(), 'html.parser')
 elem = bs.find${0}
+endsnippet
+
+snippet downImg "Description" b
+import urllib.request
+import os
+res = urllib.request.urlopen(html)
+urllib.request.urlretrieve(imgUrl, os.path.basename(imgUrl))
+endsnippet
+
+snippet ttkAdd "" b
+${1:var} = ttk.${2:type}(win)
+$1.grid(row=0)
+endsnippet
+
+snippet ttkCombo "Description" b
+def foo(event):#function called when '<<ComboboxSelected>>' event is triggered
+	print v.get()#how to access to combobox selected item
+
+
+root = Tk()
+v = StringVar()#a string variable to hold user selection
+options=["option 1", "option 2", "option 3"] #available combobox options
+frame = Frame(root)
+frame.pack()
+combo = Combobox(root,textvariable=v, values=options)
+combo.bind('<<ComboboxSelected>>',foo)#binding of user selection with a custom callback
+combo.current(1)#set as default "option 2"
+combo.pack()
+root.mainloop()
+endsnippet
+
+snippet impskMLP "" b
+from sklearn.neural_network.multilayer_perceptron import MLPClassifier
+endsnippet
+
+snippet bsgt "get_text" w
+get_text(separator="\n")
+endsnippet
+
+snippet bsIfLink "" b
+link_url = link.get('href')
+if link_url is not None and link_url.startswith('http'):
+	pass
+endsnippet
+
+snippet reqSess "Description" b
+from requests_html import HTMLSession
+
+session = HTMLSession()
+site = "${1}"
+r = session.get(site)
+temp = r.html.find(".temp", first=True)${0}
+endsnippet
+
+snippet toJson "save as file"
+jsonfile = {}
+${1:data} = "$1.json"
+with open($1, "w") as fp:
+	json.dump(jsonfile, fp)
+endsnippet
+
+snippet importJC "json_class" b
+import sys
+sys.path.insert(0, "/Users/chunkityu/gitfiles/mess_room/python3/lib")
+from json_class import JsonClass
+endsnippet
+
+snippet saveImg "save online image" b
+import requests
+
+def save_image(img_url):
+	img_response = requests.get(img_url)
+	abbr = img_url.split("/")
+	f = open('./${1:img/}{0}'.format(abbr[-1]), 'ab')
+	f.write(img_response.content)
+	f.close()
 endsnippet

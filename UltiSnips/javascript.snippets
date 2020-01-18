@@ -214,3 +214,56 @@ endsnippet
 snippet getTn "get doc tag name" b
 var ${1:a} = document.getElementsByTagName("$1");$0
 endsnippet
+snippet ire "import react" b
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './css/index.css';
+endsnippet
+snippet imf "import from" b
+import ${1:method} from '${0:module}'
+endsnippet
+
+snippet rcl "react class" b
+class ${1:ClassName} extends React.Component {
+	state = {
+	}
+	${0}
+}
+endsnippet
+snippet dvcn "" w
+<div className="${1:cls}">
+	${0}
+</div>
+endsnippet
+snippet jqajax "" b
+$.ajax({
+	url: "${1}",
+	data: ${2},
+	dataType: "text",
+	success: function(result) {
+
+	},
+	error: function(xhr, ajaxOptions, thrownError) {
+		alert(xhr.status);
+		alert(thrownError);
+	}
+});
+endsnippet
+snippet ajaxE "error" b
+error: function (xhr, ajaxOptions, thrownError) {
+	alert(xhr.status);
+	alert(thrownError);
+}
+endsnippet
+snippet jqcss "Description" b
+$("${1:}").css("${2:}", "${0}");
+endsnippet
+snippet jqready "ready" b
+$(document).ready(function() {
+	${0}
+})
+endsnippet
+
+snippet jqfind "" w
+$("${1}").find(":selected").text()${0}
+endsnippet

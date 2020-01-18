@@ -155,3 +155,230 @@ try (BufferedWriter writer = Files.newBufferedWriter(file)) {
 	// Handle file I/O exception...
 }
 endsnippet
+snippet @servlet "servlet" b
+@WebServlet(name = "${1:name}", urlPatterns = {"/$1"})
+public class $1 extends HttpServlet {
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		res.setContentType('text/html');
+		req.setCharacterEncoding("UTF-8");
+		PrintWriter out = res.getWriter();
+		${0}
+	}
+}
+endsnippet
+
+snippet jvbind "jvbind" b
+Connection cnnct = null;
+PreparedStatement pStmnt = null;
+${1}
+try {
+	cnnct = getConnection();
+	String preQueryStatement = "${2}";
+	pStmnt = cnnct.prepareStatement(preQueryStatement);
+	pStmnt.setString(${3});
+	ResultSet rs = null;
+	rs = pStmnt.executeQuery();
+	if (rs.next()) {
+		${0}
+	}
+	pStmnt.close();
+	cnnct.close();
+
+} catch (SQLException ex) {
+	while (ex != null) {
+		ex.printStackTrace();
+		ex = ex.getNextException();
+	}
+} catch (IOException ex) {
+	ex.printStackTrace();
+}
+endsnippet
+
+snippet jvTable "statment" b
+public void create${1}Table() {
+	Connection cnnct = null;
+	Statement stmnt = null;
+	try {
+		cnnct = getConnection();
+		stmnt = cnnct.createStatement();
+		String sql
+				= "CREATE TABLE IF NOT EXISTS $1 ("
+				+ "id varchar(5) NOT NULL,"
+				+ "username varchar(25) NOT NULL,"
+				+ "password varchar(25) NOT NULL,"
+				+ "PRIMARY KEY (id)"
+				+ ")";
+		stmnt.execute(sql);
+		stmnt.close();
+		cnnct.close();
+
+	} catch (SQLException ex) {
+		ex.printStackTrace();
+	} catch (IOException ex) {
+		ex.printStackTrace();
+	}
+}
+endsnippet
+
+snippet jvDB "Description" b
+public class ${1:`!p snip.rv = snip.basename or "untitled"`} {
+	private String dbUrl, dbUser, dbPassword;
+
+	public $1(String dbUrl, String dbUser, String dbPassword) {
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPassword = dbPassword;
+	}
+
+	public Connection getConnection() throws SQLException, IOException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+	}
+}
+endsnippet
+
+snippet impSql "Description" b
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+endsnippet
+
+snippet baseDB "Description" b
+package ict.db;
+
+import ict.bean.BaseBean;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class BaseDb {
+
+	private String url = "";
+	private String username = "";
+	private String password = "";
+
+	public BaseDb(String url, String username, String password) {
+		this.url = url;
+		this.username = username;
+		this.password = password;
+	}
+
+	public Connection getConnection() throws SQLException, IOException {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return DriverManager.getConnection(url, username, password);
+	}
+
+	public ArrayList<BaseBean> getRecords(String statement, ArrayList<String> data, BaseBean bb) {
+		Connection cnnct = null;
+		PreparedStatement pStmnt = null;
+		ArrayList recordList = new ArrayList();
+
+		try {
+			cnnct = getConnection();
+			String preQueryStatement = statement;
+			pStmnt = cnnct.prepareStatement(preQueryStatement);
+			for (int i = 1; i <= data.size(); i++) {
+				pStmnt.setString(i, data.get(i - 1));
+			}
+			ResultSet rs = null;
+			rs = pStmnt.executeQuery();
+			while (rs.next()) {
+				BaseBean b = bb.getBean(rs);
+				recordList.add(b);
+			}
+			pStmnt.close();
+			cnnct.close();
+		} catch (SQLException ex) {
+			while (ex != null) {
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return recordList;
+	}
+
+	public BaseBean getRecord(String statement, ArrayList<String> data, BaseBean bb) {
+		Connection cnnct = null;
+		PreparedStatement pStmnt = null;
+
+		try {
+			cnnct = getConnection();
+			String preQueryStatement = statement;
+			pStmnt = cnnct.prepareStatement(preQueryStatement);
+			for (int i = 1; i <= data.size(); i++) {
+				pStmnt.setString(i, data.get(i - 1));
+			}
+			ResultSet rs = null;
+			rs = pStmnt.executeQuery();
+			if (rs.next()) {
+				bb.mapBean(rs);
+			}
+			pStmnt.close();
+			cnnct.close();
+		} catch (SQLException ex) {
+			while (ex != null) {
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return bb;
+	}
+
+	public boolean editRecord(String statement, ArrayList<String> data, BaseBean bb) {
+		Connection cnnct = null;
+		PreparedStatement pStmnt = null;
+		boolean isSuccess = false;
+		try {
+			cnnct = getConnection();
+			String preQueryStatement = statement;
+			pStmnt = cnnct.prepareStatement(preQueryStatement);
+			for (int i = 1; i <= data.size(); i++) {
+				pStmnt.setString(i, data.get(i - 1));
+			}
+			int rowCount = pStmnt.executeUpdate();
+			if (rowCount >= 1) {
+				isSuccess = true;
+			}
+			pStmnt.close();
+			cnnct.close();
+		} catch (SQLException ex) {
+			while (ex != null) {
+				ex.printStackTrace();
+				ex = ex.getNextException();
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return isSuccess;
+	}
+
+}
+endsnippet
+
+
+snippet rc "Description" b
+int rowCount = pStmnt.executeUpdate();
+if (rowCount >= 1) {
+	isSuccess = true;
+}
+endsnippet
+snippet reqP "Description" w
+request.getParameter("${1}");${0}
+endsnippet

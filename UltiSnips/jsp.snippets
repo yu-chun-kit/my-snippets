@@ -1,0 +1,14 @@
+snippet <% "jsp" b
+<% ${0} %>
+endsnippet
+
+snippet jspheader "Description" b
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+endsnippet
+
+snippet getP "parameter value" w
+request.getParameterValue(${0});
+endsnippet
+snippet outp "Description" b
+out.println(${1});${0}
+endsnippet

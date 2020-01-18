@@ -50,7 +50,7 @@ snippet linkbtst "bootstrap" b
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 endsnippet
 snippet srcjq "jquery" b
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 endsnippet
 snippet greater "greater" w
 &gt;
@@ -123,7 +123,7 @@ snippet jqdatatable "" b
 <div id="content-wrapper">
 <div class="container-fluid">
 	<div class="card mb-3">
-		<div class="card-header">Data Table Test</div>
+		<div class="card-header">${2:Data Table Test}</div>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
@@ -144,7 +144,7 @@ snippet jqdatatable "" b
 							<td>Edinburgh</td>
 							<td>61</td>
 							<td>2011/04/25</td>
-							<td>$320,800</td>
+							<td>320,800</td>
 						</tr>
 					</tbody>
 				</table>
@@ -155,6 +155,36 @@ snippet jqdatatable "" b
 </div>
 endsnippet
 
+snippet formg "Description" b
+<fieldset class="form-group">
+	<label for="${1:idname}">${3:title}</label>
+	<input type="${2:type}" class="form-control" id="$1" name="$1" placeholder="$3">
+</fieldset>${0}
+endsnippet
+
 # vim:ft=snippets:
 
-
+snippet htmljq "Description" b
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lab 3-3</title>
+</title>
+	<link rel="stylesheet" href="jslib/jquery-ui.min.css">
+</head>
+<body>
+	${0}
+	<script src="jslib/jquery-3.4.1.js"></script>
+	<script src="jslib/jquery-ui.js"></script>
+	<script>
+	$(function() {
+	});
+	</script>
+</body>
+</html>
+endsnippet
+snippet cN "class" w
+class="${1}"${0}
+endsnippet
