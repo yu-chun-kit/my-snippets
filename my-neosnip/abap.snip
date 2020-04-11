@@ -1,0 +1,45 @@
+snippet     if
+abbr        if
+options head
+	IF ${1}.
+		${0}
+	ENDIF.
+
+snippet     loopat
+abbr        loopat
+options     head
+	LOOP AT ${1:#:table} INTO ${2:#:obj}.
+		${0}
+	ENDLOOP
+
+snippet     define
+abbr        define
+options     head
+	DEFINE ${1}.
+		${0}
+	END-OF-DEFINITION.
+
+snippet     catch
+abbr        catch
+options     head
+	CATCH SYSTEM-EXCEPTIONS ${1} = ${2}.
+		${0}
+	ENDCATCH.
+
+snippet     selscr
+abbr        selection-screen
+options     head
+	SELECTION-SCREEN BEGIN OF BLOCK ${1:options} WITH FRAME TITLE ${2:opt}.
+		${0}
+	SELECTION-SCREEN END OF BLOCK $1.
+	INITIALIZATION.
+		$2 = '$2'.
+
+snippet     selectinto
+abbr        selectinto
+options     head
+	SELECT ${1}
+		INTO CORRESPONDING FIELDS OF TABLE ${2}
+		FROM tbl1 INNER JOIN
+		ON tbl1~x = tbl2~x
+		WHERE ${0}.
