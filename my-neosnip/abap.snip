@@ -2,7 +2,7 @@ snippet     if
 abbr        if
 options head
 	IF ${1}.
-		${0}
+		${0}.
 	ENDIF.
 
 snippet     loopat
@@ -43,3 +43,16 @@ options     head
 		FROM tbl1 INNER JOIN
 		ON tbl1~x = tbl2~x
 		WHERE ${0}.
+
+snippet     elif
+abbr        elif
+options     head
+	ELSEIF ${1}.
+		${0}.
+
+snippet     tblbg
+abbr        tblbg
+options     head
+	TYPES: BEGIN OF ${1:int_rec},
+	         ccc TYPE c,${0}
+	       END OF $1.
