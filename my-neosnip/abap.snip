@@ -10,7 +10,7 @@ abbr        loopat
 options     head
 	LOOP AT ${1:#:table} INTO ${2:#:obj}.
 		${0}
-	ENDLOOP
+	ENDLOOP.
 
 snippet     define
 abbr        define
@@ -56,3 +56,13 @@ options     head
 	TYPES: BEGIN OF ${1:int_rec},
 	         ccc TYPE c,${0}
 	       END OF $1.
+
+snippet     switch
+abbr        switch
+options     head
+	CASE ${1:}.
+	    WHEN ${2:}.
+	        ${0}.
+	    WHEN OTHERS.
+	        WRITE: 'others'.
+	ENDCASE.
