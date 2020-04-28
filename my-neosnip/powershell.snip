@@ -1,0 +1,39 @@
+snippet     addaduser
+abbr        addaduser
+options     head
+	New-ADUser -AccountPassword (ConvertTo-SecureString '${1:Pa$$w0rd}' \`
+		-AsPlainText -Force) -ChangePasswordAtLogon $False \`
+		-PasswordNeverExpires $True -Enabled $True \`
+		-DisplayName "${2:MaryLau}" -SamAccountName ${3:marylau} -Name $3 \`
+		-Path "CN=Users,DC=ospa,DC=local"${0}
+
+snippet     addadgp
+abbr        addadgp
+options     head
+	New-ADGroup -Name ${1:LAUs} -GroupScope Global \`
+		-Path "CN=Users,DC=ospa,DC=local"${0}
+
+snippet     addadmem
+abbr        addadmem
+options     head
+	Add-ADGroupMember -Identity ${1:Chinese} -Members ${2:mem}${0}
+
+snippet     cndc
+abbr        cndc
+options     word
+	"CN=${1:Users},DC=${2:ospa},DC=${3:local}"${0}
+
+snippet     getacl
+abbr        getacl
+options     head
+	$acl = Get-Acl ${1:C:\Folder}
+	$acl.SetAccessRuleProtection($True, $False)
+	# $acl.SetAccessRule($ace) # or getaccessrule
+
+snippet     getace
+abbr        getace
+options     head
+	$ace = New-Object System.Security.AccessControl.FileSystemAccessRule( \`
+		"${1:Administrator}", "ReadData,AppendData", \`
+		"ContainerInherit,ObjectInherit", \`
+		"None", "Allow")${0}
