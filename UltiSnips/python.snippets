@@ -139,15 +139,9 @@ if args:
 write_init_body(args, t[2], snip)`
 		$0
 endsnippet
-snippet repr "string representation"
-def __repr__(self):
-	${1:pass}
-
+snippet _str "string representation"
 def __str__(self):
-	${2:$1}
-
-def __unicode__(self):
-	${3:$1}
+	return ${0}
 endsnippet
 snippet poisson "poisson distribution" b
 (math.exp(-${1:muse}) * $1 ** ${2:x_var}) / math.factorial($2)${0}
@@ -444,13 +438,6 @@ bs = BeautifulSoup(html.read(), 'html.parser')
 elem = bs.find${0}
 endsnippet
 
-snippet downImg "Description" b
-import urllib.request
-import os
-res = urllib.request.urlopen(html)
-urllib.request.urlretrieve(imgUrl, os.path.basename(imgUrl))
-endsnippet
-
 snippet ttkAdd "" b
 ${1:var} = ttk.${2:type}(win)
 $1.grid(row=0)
@@ -487,7 +474,7 @@ if link_url is not None and link_url.startswith('http'):
 	pass
 endsnippet
 
-snippet reqSess "Description" b
+snippet impReqSess "Description" b
 from requests_html import HTMLSession
 
 session = HTMLSession()
@@ -515,7 +502,18 @@ import requests
 def save_image(img_url):
 	img_response = requests.get(img_url)
 	abbr = img_url.split("/")
-	f = open('./${1:img/}{0}'.format(abbr[-1]), 'ab')
-	f.write(img_response.content)
-	f.close()
+	filename = './img/{0}'.format(abbr[-1])
+	with open(filename, "wb") as fp:
+		fp.write(img_response.content)
+endsnippet
+
+snippet downloadImg "Description" b
+import urllib.request
+import os
+res = urllib.request.urlopen(html)
+# urllib.request.urlretrieve(imgUrl, os.path.basename(imgUrl))
+endsnippet
+
+snippet selSendKey "sendkeys" w
+send_keys(Keys.chord(Keys.CONTROL, "a"), ${0})
 endsnippet
