@@ -34,3 +34,13 @@ tags:
 
 ${0}
 endsnippet
+
+snippet docs "" b
+---
+layout: post
+title:  ${1:`!v vim_snippets#Filename('$1', 'foo')`}
+date :  `!v strftime("%Y-%m-%d %H:%M:%S")` +0800
+categories: ${2:can't sleep}
+---
+${0}
+endsnippet
