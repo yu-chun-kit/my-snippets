@@ -21,14 +21,14 @@ options     head
 snippet     cndc
 abbr        cndc
 options     word
-	"CN=${1:Users},DC=${2:ospa},DC=${3:local}"${0}
+	"CN=${1:Users},DC=ospa,DC=local"${0}
 
 snippet     getacl
 abbr        getacl
 options     head
 	$acl = Get-Acl ${1:C:\Folder}
 	$acl.SetAccessRuleProtection($True, $False)
-	# $acl.SetAccessRule($ace) # or getaccessrule
+	Set-Acl $1 -AclObject $acl${0}
 
 snippet     getace
 abbr        getace
@@ -37,3 +37,41 @@ options     head
 		"${1:Administrator}", "ReadData,AppendData", \`
 		"ContainerInherit,ObjectInherit", \`
 		"None", "Allow")${0}
+	$acl.SetAccessRule($ace) # or getaccessrule
+
+snippet     addsmb
+abbr        addsmb
+options     head
+	New-SmbShare -Name ${1:Software}$ -Path $1 \`
+		-ReadAccess Software_Install \`
+		-ChangeAccess Software_Manage \`
+		-FullAccess "Authenticated Users"${0}
+
+snippet     addntfs
+abbr        addntfs
+options     head
+	Add-NTFSAccess -Path C:\HomeDir \`
+		-Account Software_Install \`
+		-AccessRights FullControl
+
+snippet     setgpp
+abbr        setgpp
+options     head
+	Set-GPPermission -Name "${1:Default Domain Policy}" \`
+		-TargetName "Users"  -TargetType Group \`
+		-PermissionLevel GpoApply${0}
+
+
+snippet     for
+abbr        for
+options     head
+	for ($i = ${1:0}; $i -lt ${2:10}; $i++) {
+		${0}
+	}
+
+snippet     foreach
+abbr        foreach
+options     head
+	foreach ($${1:each} in ${2:var}) {
+		Write-Host $1;${0}
+	}
