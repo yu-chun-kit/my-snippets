@@ -4,7 +4,7 @@ $1.className = "${3:}";
 setTimeout(function() { $1.className = $1.className.replace("$3", ""); }, 3000);
 endsnippet
 snippet get "Get Elements" i
-getElement${1/(T)|(C)|.*/(?1:s)(?2:s)/}By${1:T}${1/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$2')
+${1:document}.getElement${2/(T)|(C)|.*/(?1:s)(?2:s)/}By${2:T}${2/(T)|(I)|(C).*/(?1:agName)(?2:d)(?3:lassName)/}('$3');${0}
 endsnippet
 snippet doc "Description" w
 document
@@ -266,4 +266,37 @@ endsnippet
 
 snippet jqfind "" w
 $("${1}").find(":selected").text()${0}
+endsnippet
+
+# expand console.log
+snippet "([^\s]\w+)\.log" "console.log(postfix)" r
+console.log(`!p snip.rv = match.group(1)`)$0
+endsnippet
+
+snippet mod_exp "module exports" b
+module.exports = ${0:`!v vim_snippets#Filename('$1', 'foo.html')`};
+endsnippet
+
+snippet set_cookie "set cookie" b
+function setCookie(cname,cvalue,exdays)
+{
+  var d = new Date();
+  d.setTime(d.getTime()+(exdays*24*60*60*1000));
+  var expires = "expires="+d.toGMTString();
+  document.cookie = cname + "=" + cvalue + "; " + expires;
+}${0}
+endsnippet
+
+snippet get_cookie "get cookie" b
+function getCookie(cname)
+{
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) 
+  {
+    var c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
 endsnippet

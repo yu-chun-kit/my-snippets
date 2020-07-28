@@ -22,3 +22,9 @@ snippet icmt "comment inline." b
 snip.rv = comment_inline(snip, START="/* ", END=" */")
 `$0
 endsnippet
+
+snippet tmt "comment jsx." b
+`!p
+snip.rv = comment_inline(snip, START="{/* ", END=" */}")
+`$0
+endsnippet
