@@ -215,7 +215,7 @@ endsnippet
 
 snippet block "jinja block" b
 {% block ${1:} %}
-${0}
+${0:${VISUAL:}}
 {% endblock %}
 endsnippet
 
@@ -241,4 +241,8 @@ snippet nav_link "b4 nav_link" b
 		<a class="nav-item nav-link" href="${1}">${0}</a>
 	</div>
 </div>
+endsnippet
+
+snippet extends "jinja extends" b
+{% extends "${1}" %}${0}
 endsnippet
