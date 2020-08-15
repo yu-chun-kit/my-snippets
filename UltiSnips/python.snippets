@@ -70,7 +70,7 @@ snippet xfor "x ** ?" w
 x**${1:2} for x in range(${2:1, 10})${0}
 endsnippet
 
-snippet immplt "matlib plt" b
+snippet imp_plt "matlib plt" b
 import matplotlib.pyplot as plt
 endsnippet
 snippet pltplot "make line" b
@@ -140,6 +140,7 @@ if args:
 write_init_body(args, t[2], snip)`
 		$0
 endsnippet
+
 snippet _str "string representation"
 def __str__(self):
 	return ${0}
@@ -183,7 +184,7 @@ for ${1:index}, ${2:item} in enumerate(${3:iterable}):
 endsnippet
 
 snippet forkv "for key,value" b
-for ${1:key}, ${2:value} in ${3:iterable}.items():
+for ${1:key}, ${2:value} in ${3:iterable}.iteritems():
 	${0:print($1, $2)}
 endsnippet
 
@@ -218,8 +219,12 @@ try:
 	from urllib2 import urlopen
 except ImportError:
 	from urllib.request import urlopen
+endsnippet
+
+snippet imp_bs4 "Description" b
 from bs4 import BeautifulSoup
 endsnippet
+
 snippet draw_html "Description" b
 with open('${1:FileName}.html', 'w', encoding='utf8') as html_file:
 	msg = "<html> <head> <title>${2:html_title}</title> <meta"
@@ -436,9 +441,7 @@ if user is not None:
 endsnippet
 
 snippet bsFind "find with bs4" b
-html = urlopen('${1:file:./example.html}')
-bs = BeautifulSoup(html.read(), 'html.parser')
-elem = bs.find${0}
+bs = BeautifulSoup(${1:r.text}, 'lxml')${0}
 endsnippet
 
 snippet ttkAdd "" b
@@ -477,15 +480,6 @@ if link_url is not None and link_url.startswith('http'):
 	pass
 endsnippet
 
-snippet impReqSess "Description" b
-from requests_html import HTMLSession
-
-session = HTMLSession()
-site = "${1}"
-r = session.get(site)
-temp = r.html.find(".temp", first=True)${0}
-endsnippet
-
 snippet toJson "save as file"
 jsonfile = {}
 ${1:data} = "$1.json"
@@ -497,6 +491,11 @@ snippet importJC "json_class" b
 import sys
 sys.path.insert(0, "/Users/chunkityu/gitfiles/mess_room/python3/lib")
 from json_class import JsonClass
+endsnippet
+
+snippet path_append "append library path" b
+import sys
+sys.path.append("`!v expand('%:p:h') `")${0}
 endsnippet
 
 snippet saveImg "save online image" b
@@ -533,7 +532,7 @@ snippet pr_end "print end" b
 print("{:=^50}".format("END PROGRAM"))${0}
 endsnippet
 	
-snippet rest_serial "import serializer" b
+snippet imp_serial "import serializer" b
 from rest_framework import serializers${0}
 endsnippet
 
@@ -581,4 +580,83 @@ endsnippet
 snippet font_s_l "font small light" w
 ('細明體', 20)
 endsnippet
+
+snippet th_lock "thread lock" b
+lock.acquire()  # lock
+${0:${VISUAL:pass}}
+lock.release()  # endlock
+endsnippet
+
+snippet sp_popen "subprocess open" b
+p = sp.Popen(f"${1:echo hello}"
+				shell=True,
+				stdout=sp.PIPE,
+				stderr=sp.PIPE)${0}
+endsnippet
+
+snippet cv_key "cv2.waitKey" b
+if k == ord("${1:q}") or k == ord("`!p snip.rv = t[1].upper()`"):
+	${2:${VISUAL:print("Exit")
+	cv2.destroyAllWindows()
+	capture.release()
+	break}}${0}
+endsnippet
+
+snippet cv_hough "Description" b
+lines = cv2.HoughLinesP(image=roi,
+						rho=3,
+						theta=np.pi/180,
+						threshold=30,
+						minLineLength=50,
+						maxLineGap=40)
+endsnippet
+
+snippet tk_inline_input "tk entry and btn" b
+def func():
+	pass
+${1:}_path = tk.StringVar()
+$1_entry = tk.Entry(input_fm, textvariable=$1_path, width=50)
+$1_entry.place(rely=0.${3:5}, relx=0.5, anchor='center')
+$1_btn = tk.Button(input_fm, text='$2', command=func,
+				bg='#FFD700', fg='Black', font=('細明體', 10))
+$1_btn.place(rely=0.$3, relx=0.85, anchor='center')
+endsnippet
+
+snippet "([^\s]\w+)\.len" "len(postfix)" r
+len(`!p snip.rv = match.group(1)`)$0
+endsnippet
+
+snippet ifl "if len" b
+if len(${1:var}) > ${2:0}:
+	${0:${VISUAL}}
+endsnippet
+
+snippet drvf "driver find" w
+${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:lass_name)(?4:ag_name)(?5:ame)/}('${3}')${0}
+endsnippet
+
+snippet drvMan "driver manager" b
+from webdriver_manager.chrome import ChromeDriverManager
+driver = webdriver.Chrome(ChromeDriverManager().install())
+endsnippet
+snippet cv2wk "waitKey in cv2" b
+cv2.waitKey()
+cv2.destroyAllWindows()${0}
+endsnippet
+
+snippet sqlite_select "sqlite3 select" b
+connect = sqlite3.connect('${1:database}.sqlite')
+sql = 'select * from mytable'
+cursor = connect.execute(sql)
+datum = cursor.fetchall()
+for data in datum:
+	print(f"{data[0]}\t{data[1]}")
+connect.close()
+endsnippet
+
+snippet dt_ftime "Description" w
+datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")${0}
+endsnippet
+
 # vim:ft=snippets:
+

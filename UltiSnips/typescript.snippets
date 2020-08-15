@@ -1,3 +1,9 @@
-snippet ifc "FunctionComponent" b
-import React, { FunctionComponent, useState } from 'react';
+snippet imp_fc "FunctionComponent" b
+import React, { useState, useEffect } from 'react';
+endsnippet
+
+snippet type "set type" b
+type ${1:`!p snip.rv = fn.split('.')[0].title()`}Props = {
+	${2:username}: String
+}${0}
 endsnippet
