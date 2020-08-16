@@ -636,6 +636,7 @@ ${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:l
 endsnippet
 
 snippet drvMan "driver manager" b
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
 endsnippet
