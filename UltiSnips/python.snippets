@@ -509,6 +509,12 @@ def save_image(img_url):
 		fp.write(img_response.content)
 endsnippet
 
+snippet downloadFile "save file" b
+with open(os.path.join("${1:a}", os.path.basename(url)), "wb") as f:
+    for chunk in r.iter_content(chunk_size=512 * 1024):
+		f.write(chunk)
+endsnippet
+
 snippet downloadImg "Description" b
 import urllib.request
 import os
@@ -635,11 +641,16 @@ snippet drvf "driver find" w
 ${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:lass_name)(?4:ag_name)(?5:ame)/}('${3}')${0}
 endsnippet
 
-snippet drvMan "driver manager" b
+snippet impSelMan "driver manager" b
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
 endsnippet
+
+snippet impSelKey "selenium key" b
+from selenium.webdriver.common.keys import Keys
+endsnippet
+
 snippet cv2wk "waitKey in cv2" b
 cv2.waitKey()
 cv2.destroyAllWindows()${0}
@@ -657,6 +668,31 @@ endsnippet
 
 snippet dt_ftime "Description" w
 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")${0}
+endsnippet
+
+snippet impExcel "openpyxl lib" b
+import openpyxl
+from openpyxl.utils.cell import coordinate_from_string, column_index_from_string, \
+	coordinate_from_string
+
+wb = openpyxl.load_workbook('${1:example}.xlsx')
+ws = wb.active
+${0}
+endsnippet
+
+snippet fortwo "usually forget zip" b
+for a, b in zip(${1:foo, bar}):
+    print(a, b)
+endsnippet
+
+snippet for_excel "for openpyxl" b
+for ${1:row} in ws[${2:'A1':'C3'}]:
+    for cell in $1:
+		${0:${VISUAL:cell.coordinate}}
+endsnippet
+
+snippet abspath "abs path" b
+abs_path = os.path.dirname(os.path.abspath(__file__))
 endsnippet
 
 # vim:ft=snippets:
