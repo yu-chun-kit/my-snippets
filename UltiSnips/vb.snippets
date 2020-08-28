@@ -1,9 +1,53 @@
+# statement
 snippet if "if" b
 If ${1:} Then
 	${0:${VISUAL}}
 EndIf
 endsnippet
 
-snippet new "" wA
-New
+snippet select "select case" b
+Select Case ${1:}
+	Case Else
+	${0}
+End Select
+endsnippet
+
+snippet sub "select case" b
+Sub ${1:}(Source As Button)
+	${0}
+End Sub
+endsnippet
+
+
+snippet dim "dim var" b
+Dim ${1:var} As ${2:I}${2/(I)|(S)|(D)|(N)|(V)|.*/(?1:nteger)(?2:tring)(?3:ouble)(?4:otes)(?5:ariant)/}${0}
+endsnippet
+
+snippet set "set var" b
+Set ${1:var} = ${2:New }${0}
+endsnippet
+
+snippet dowh "do while" b
+Do While ${1:True}
+	${0}
+Loop
+endsnippet
+
+snippet dout "do until" b
+Do Until ${1:True}
+	${0}
+Loop
+endsnippet
+
+# snippet
+snippet dimset "dim and set" b
+Dim ${1:var} As Notes${2:UIWorkSpace}
+Set $1 = ${3:New Notes$2}${0}
+endsnippet
+
+#keyword
+# =.= vb keyword is not case sensitive
+# idk why you should change to camel case
+snippet call "" wA
+Call
 endsnippet
