@@ -659,5 +659,10 @@ snippet dt_ftime "Description" w
 datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")${0}
 endsnippet
 
+snippet logging_debug "log debug" b
+logging.basicConfig(filename="${1:myLog.log}", level=logging.DEBUG,
+					format='%(asctime)s - %(levelname)s - %(message)s')
+endsnippet
+
 # vim:ft=snippets:
 
