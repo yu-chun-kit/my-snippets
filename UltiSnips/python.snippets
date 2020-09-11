@@ -641,6 +641,10 @@ snippet drvf "driver find" w
 ${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:lass_name)(?4:ag_name)(?5:ame)/}('${3}')${0}
 endsnippet
 
+snippet drvShot "Description" b
+${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:lass_name)(?4:ag_name)(?5:ame)/}('${3}').screenshot("captcha.png")${0}
+endsnippet
+
 snippet impSelMan "driver manager" b
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
