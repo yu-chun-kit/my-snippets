@@ -300,3 +300,30 @@ function getCookie(cname)
   return "";
 }
 endsnippet
+
+################
+#  for nodejs  #
+################
+snippet docs "Description" b
+/* jshint esversion: 6 */
+/****************
+* Filename: ${1:`!v vim_snippets#Filename('$1.js', 'foo.js')`}
+* Programmer: `!v g:snips_author`
+* Email: `!v g:snips_email`
+* Github: `!v g:snips_github`
+* Date : `!v strftime("%Y-%m-%d %H:%M:%S")`
+* Description: ${2:useless program}
+****************/
+endsnippet
+
+snippet requ "require nodejs" b
+const ${1:} = require("${2:$1}");
+endsnippet
+
+snippet fthHTML "fetch html" b
+async function fetchHTML(url) {
+  const { data } = await axios.get(url)
+  return cheerio.load(data)
+}
+const $ = await fetchHTML("${1:https://www.google.com/}")${0}
+endsnippet
