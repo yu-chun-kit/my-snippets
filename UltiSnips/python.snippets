@@ -714,5 +714,10 @@ snippet progHead "prog head" b
 #
 endsnippet
 
+snippet logging_debug "log debug" b
+logging.basicConfig(filename="${1:myLog.log}", level=logging.DEBUG,
+					format='%(asctime)s - %(levelname)s - %(message)s')
+endsnippet
+
 # vim:ft=snippets:
 
