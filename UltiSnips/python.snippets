@@ -7,9 +7,9 @@ global !p
 from useful_func import (tranf_clsname, write_init_body, write_function_docstring, triple_quotes, get_args, write_docstring_args)
 endglobal
 snippet deff "function" b
-def ${1:function}(`!p
+def ${0:function}(`!p
 if snip.indent:
-	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+	snip.rv = 'self' + (", " if len(t[1]) else "")`${2:arg1}):
 	${5:${VISUAL:pass}}
 endsnippet
 
@@ -697,6 +697,21 @@ endsnippet
 
 snippet abspath "abs path" b
 abs_path = os.path.dirname(os.path.abspath(__file__))
+endsnippet
+
+snippet progHead "prog head" b
+# 
+# ${1:`!p snip.rv = fn.split('.')[0].title()`} (`!v vim_snippets#Filename('$1.py', 'foo.py')`)
+# 
+# Purpose: This program can ${2:$1}
+#
+# Limitation: This program does not ${3:$1} 
+# 
+# Written by Johnson Yu Chun Kit
+#
+# On `!v strftime("%Y/%m/%d")`
+# For Assignment 1
+#
 endsnippet
 
 # vim:ft=snippets:

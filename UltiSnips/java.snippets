@@ -387,3 +387,9 @@ snippet async_task "" b
 // still not write
 private class DownloadFilesTask extends AsyncTask<URL, Integer, Long> { // <Params, Progress, Result>
 endsnippet
+
+snippet formap "for map" b
+for (Map.Entry<String, String> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + "/" + entry.getValue());
+}
+endsnippet
