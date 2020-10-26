@@ -113,11 +113,6 @@ filename = "${1:file.txt}"
 with open(filename, "${2:r+}") as fp:
 	${3:contents = fp.read()}${0}
 endsnippet
-snippet get_json "get json" b
-filename = "${1:file.json}"
-with open(filename, "${2:w+}") as fp:
-	json.dump(data, fp){0}
-endsnippet
 snippet opennext "Description" b
 for i in range(${1:0}):
 	fp.next()${0}
@@ -242,7 +237,7 @@ snippet req_json "store req json" b
 URL = "${1:json_address}"
 r = requests.get(URL)
 print("Status code:", r.status_code)
-with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', 'w') as f:
+with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', 'w', encoding="UTF-8") as f:
 	f.write(r.text)
 file_requests = req.json()
 endsnippet
@@ -480,13 +475,6 @@ if link_url is not None and link_url.startswith('http'):
 	pass
 endsnippet
 
-snippet toJson "save as file"
-jsonfile = {}
-${1:data} = "$1.json"
-with open($1, "w") as fp:
-	json.dump(jsonfile, fp)
-endsnippet
-
 snippet importJC "json_class" b
 import sys
 sys.path.insert(0, "/Users/chunkityu/gitfiles/mess_room/python3/lib")
@@ -719,5 +707,22 @@ logging.basicConfig(filename="${1:myLog.log}", level=logging.DEBUG,
 					format='%(asctime)s - %(levelname)s - %(message)s')
 endsnippet
 
+snippet header1 "selenium header" b
+headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3676.400 QQBrowser/10.4.3469.400'}
+requsts.get(url, headers=headers)
+endsnippet
+
+snippet load_json "load json" b
+with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', "w", encoding="UTF-8") as fp:
+	${1:data} = json.load(fp)
+endsnippet
+
+snippet dump_json "dump json" b
+with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', "w", encoding="UTF-8") as fp:
+    json.dump(data, fp, ensure_ascii=False, indent=2)
+endsnippet
+
+
 # vim:ft=snippets:
+
 
