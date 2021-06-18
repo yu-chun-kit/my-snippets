@@ -327,3 +327,12 @@ async function fetchHTML(url) {
 }
 const $ = await fetchHTML("${1:https://www.google.com/}")${0}
 endsnippet
+
+snippet initmw "init middleware" b
+const express = require('express');
+const router = express.Router();
+
+${0}
+
+module.exports = router;
+endsnippet

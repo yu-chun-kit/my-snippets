@@ -693,12 +693,12 @@ snippet progHead "prog head" b
 # 
 # Purpose: This program can ${2:$1}
 #
-# Limitation: This program does not ${3:$1} 
+# Limitation: This program does not design for other usage
 # 
 # Written by Johnson Yu Chun Kit
 #
 # On `!v strftime("%Y/%m/%d")`
-# For Assignment 1
+# For Assignment 4
 #
 endsnippet
 
@@ -720,6 +720,11 @@ endsnippet
 snippet dump_json "dump json" b
 with open('${2:`!p snip.rv = fn.split('.')[0]`}.json', "w", encoding="UTF-8") as fp:
     json.dump(data, fp, ensure_ascii=False, indent=2)
+endsnippet
+
+snippet log_format "logger format" b
+FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
+logging.basicConfig(format=FORMAT)
 endsnippet
 
 
