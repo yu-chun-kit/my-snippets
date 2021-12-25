@@ -343,7 +343,7 @@ with open('test.txt', 'w') as f:
 
 files.download('test.txt')
 endsnippet
-snippet impSel "chrome driver" b
+snippet impChrome "chrome driver" b
 # brew cask upgrade chromedriver
 from selenium import webdriver
 path = "/usr/local/bin/chromedriver"
@@ -633,7 +633,7 @@ snippet drvShot "Description" b
 ${1:driver}.find_element_by_${2:x}${2/(x)|(i)|(c)|(t)|(n).*/(?1:path)(?2:d)(?3:lass_name)(?4:ag_name)(?5:ame)/}('${3}').screenshot("captcha.png")${0}
 endsnippet
 
-snippet impSelMan "driver manager" b
+snippet drvImp "driver manager" b
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
